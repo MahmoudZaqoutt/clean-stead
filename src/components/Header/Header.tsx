@@ -56,14 +56,12 @@ const Header = () => {
                 {
                   href: "",
                   content: <Login />,
-                  // classNameOfLI:
-                  //   "hover:bg-blue-50 ease-in-out duration-150 text-[#00ADEE] font-semibold rounded-full border-2 border-[#00ADEE] w-[120px] h-[50px] pt-2 text-center md:block hidden",
                 },
                 {
                   href: "",
                   content: <SignUp />,
-                  classNameOfLI:
-                    "bg-[#00ADEE] text-white  hidden md:block rounded-full  hover:bg-opacity-90 ease-in-out duration-150  pt-2  font-semibold text-center border-2 border-[#00ADEE] w-[120px] h-[50px]",
+                  // classNameOfLI:
+                  // "text-xl pb-3 bg-[#00ADEE] text-white  hidden md:block rounded-full  hover:bg-opacity-90 ease-in-out duration-150  pt-2  font-semibold text-center border-2 border-[#00ADEE] w-[120px] h-[50px]",
                 },
               ]}
             />
