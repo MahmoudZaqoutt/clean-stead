@@ -13,7 +13,7 @@ const Header = () => {
           <Logo />
           <div>
             <List
-              className=" gap-5 font-semibold text-lg text-[#1D1D35] hidden md:flex"
+              className=" gap-3 font-semibold text-lg text-[#1D1D35] hidden md:flex"
               options={[
                 {
                   id: 1,
