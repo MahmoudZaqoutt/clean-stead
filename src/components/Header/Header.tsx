@@ -7,7 +7,7 @@ import Container from "../Shared/Container/Container";
 
 const Header = () => {
   return (
-    <header className=" h-20 border-b-2 bg-white shadow-md ">
+    <header className=" h-20 mb-[55px]  border-b-2 bg-white shadow-md ">
       <Container>
         <div className="w-full flex items-center justify-between h-full pt-4">
           <Logo />
