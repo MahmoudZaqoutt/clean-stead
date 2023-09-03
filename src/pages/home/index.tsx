@@ -7,6 +7,9 @@ import OurFeaturesCard from "@/components/OurFeaturesCard/OurFeaturesCard";
 import img from "../../assets/image5.png";
 import OurClientsCard from "@/components/OurClientsCard/OurClientsCard";
 import HomeImage from "@/components/HomeImage/HomeImage";
+import { SERVICES } from "@/constants/services";
+import { FEATURES } from "@/constants/features";
+import { CLIENTS } from "@/constants/clients";
 
 const Home = () => {
   return (
@@ -16,12 +19,15 @@ const Home = () => {
         <div className="w-full">
           <TitleOfSections content="الخدمات التي نقدمها" />
           <div className="grid gap-10 lg:grid-cols-2 xl:grid-cols-3  mt-[60px] mb-[80px] !justify-center !items-center">
-            <ServicesCard />
-            <ServicesCard />
-            <ServicesCard />
-            <ServicesCard />
-            <ServicesCard />
-            <ServicesCard />
+            {SERVICES.map((item: any, index) => (
+              <ServicesCard
+                key={index}
+                img={item.img}
+                title={item.title}
+                content={item.content}
+                contentToShow={item.contentToShow}
+              />
+            ))}
           </div>
         </div>
 
@@ -34,10 +40,14 @@ const Home = () => {
               className="w-[570px] h-[570px] rounded-2xl mx-auto lg:mx-0 "
             />
             <div className=" grid grid-cols-1 sm:grid-cols-2  lg:flex lg:flex-col  gap-[30px] mt-5 lg:mt-0">
-              <OurFeaturesCard />
-              <OurFeaturesCard />
-              <OurFeaturesCard />
-              <OurFeaturesCard />
+              {FEATURES.map((item: any, index) => (
+                <OurFeaturesCard
+                  key={index}
+                  img={item.img}
+                  title={item.title}
+                  subTitle={item.subTitle}
+                />
+              ))}
             </div>
           </div>
         </div>
@@ -45,9 +55,14 @@ const Home = () => {
         <div className="mb-[80px]">
           <TitleOfSections content="ماذا يقولون عملائنا" />
           <div className="mt-[60px] flex-col flex lg:flex-row justify-center  items-center gap-[50px]">
-            <OurClientsCard />
-            <OurClientsCard />
-            <OurClientsCard />
+            {CLIENTS.map((item: any, index) => (
+              <OurClientsCard
+                key={index}
+                img={item.img}
+                content={item.content}
+                name={item.name}
+              />
+            ))}
           </div>
         </div>
       </Container>

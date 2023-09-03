@@ -5,4 +5,5 @@ export interface IPropsTitleAndSubTitle {
   classNameOfSubTitle?: string;
   onChange?: any;
   className?: string;
+  img?: any;
 }
