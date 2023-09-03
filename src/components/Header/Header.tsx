@@ -59,9 +59,9 @@ const Header = () => {
                 },
                 {
                   href: "",
-                  content: <SignUp />,
-                  // classNameOfLI:
-                  // "text-xl pb-3 bg-[#00ADEE] text-white  hidden md:block rounded-full  hover:bg-opacity-90 ease-in-out duration-150  pt-2  font-semibold text-center border-2 border-[#00ADEE] w-[120px] h-[50px]",
+                  content: "احجز الآن",
+                  classNameOfLI:
+                    "text-xl pb-3 bg-[#00ADEE] text-white  hidden md:block rounded-full  hover:bg-opacity-90 ease-in-out duration-150  pt-2  font-semibold text-center border-2 border-[#00ADEE] w-[120px] h-[50px]",
                 },
               ]}
             />

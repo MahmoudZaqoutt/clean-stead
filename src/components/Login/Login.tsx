@@ -16,6 +16,8 @@ import {
 import { HiOutlineMail } from "react-icons/hi";
 import { CiLock } from "react-icons/ci";
 import { useRouter } from "next/router";
+import { BsTelephone } from "react-icons/bs";
+import { GoPerson } from "react-icons/go";
 
 export default function Login() {
   const [open, setOpen] = React.useState(false);
@@ -23,8 +25,12 @@ export default function Login() {
   const [errors, setErrors] = React.useState<any>([]);
   const [error, setError] = React.useState<any>("");
   const [showPassword, setShowPassword] = React.useState(false);
+  const [isLogin, setIsLogin] = React.useState<any>(false);
+
   const [formData, setFormData] = React.useState({
+    name: "",
     email: "",
+    phoneNumber: "",
     password: "",
   });
 
@@ -34,7 +40,9 @@ export default function Login() {
   };
 
   const schema = yup.object().shape({
+    name: yup.string().required("هذا الحقل مطلوب"),
     email: yup.string().email("إيميل غير صالح").required("هذا الحقل مطلوب"),
+    phoneNumber: yup.number().required("هذا الحقل مطلوب"),
     password: yup.string().required("هذا الحقل مطلوب"),
   });
 
@@ -90,6 +98,16 @@ export default function Login() {
     event.preventDefault();
   };
 
+  const handleSignUp = (e: any) => {
+    e.preventDefault();
+    setIsLogin(false);
+  };
+
+  const handleLogin = (e: any) => {
+    e.preventDefault();
+    setIsLogin(true);
+  };
+
   return (
     <div>
       <button
@@ -98,94 +116,277 @@ export default function Login() {
       >
         دخول
       </button>
-      <Dialog open={open} onClose={handleClose} className="h-[500px] ">
+      <Dialog open={open} onClose={handleClose} className="min-h-[600px] ">
         <DialogTitle className="text-center text-xl font-bold ">
           من فضلك قم بتسجيل الدخول للاستمرار
         </DialogTitle>
-        <DialogContent className="rounded-xl">
-          <div className="w-[400px]">
-            <form onSubmit={handleSubmit} className=" w-full ">
-              <div className="flex flex-col justify-center items-center gap-2  ">
-                <div className="w-[95%]">
-                  <label className="font-semibold block mb-1">الايميل</label>
-                  <TextField
-                    placeholder="أدخل الإيميل"
-                    InputProps={{
-                      startAdornment: (
-                        <InputAdornment position="start">
-                          <HiOutlineMail className="text-2xl text-[#CCD2E3]" />
-                        </InputAdornment>
-                      ),
-                    }}
-                    value={formData.email}
-                    name="email"
-                    title="Email"
-                    onChange={handleInputChange}
-                    className="w-full  h-14 border-2 border-gray-300 outline-none rounded-xl  text-lg"
-                  />
-                  <p className="text-sm  text-red-500  p-2 inline-block ">
-                    {errors.email ? errors.email : ""}
-                  </p>
-                </div>
-                <div className="w-[95%]">
-                  <label className="font-semibold block mb-1">
-                    كلمة المرور
-                  </label>
-                  <FormControl
-                    className="w-full h-14 border-2 border-gray-300 outline-none rounded-xl text-lg"
-                    variant="outlined"
-                  >
-                    <OutlinedInput
-                      placeholder="أدخل كلمة المرور"
-                      startAdornment={
-                        <InputAdornment position="start">
-                          <CiLock className="text-2xl text-[#CCD2E3] -mr-[14px] ml-2" />
-                        </InputAdornment>
-                      }
-                      type={showPassword ? "text" : "password"}
-                      endAdornment={
-                        <InputAdornment position="end">
-                          <IconButton
-                            className="text-2xl text-[#CCD2E3] -ml-[18px]"
-                            aria-label="toggle password visibility"
-                            onClick={handleClickShowPassword}
-                            onMouseDown={handleMouseDownPassword}
-                            edge="end"
-                          >
-                            {showPassword ? <VisibilityOff /> : <Visibility />}
-                          </IconButton>
-                        </InputAdornment>
-                      }
-                      title="Password"
-                      onChange={handleInputChange}
-                      name="password"
-                      value={formData.password}
-                    />
-                  </FormControl>
 
-                  <p className="text-sm  text-red-500  p-2 inline-block ">
-                    {errors.password ? errors.password : ""}
-                  </p>
-                </div>
+        {isLogin ? (
+          <>
+            <DialogContent className="rounded-xl">
+              <div className="w-[95%] mx-auto flex items-center justify-around border-b-2 border-[#F2F2F2] pb-5 mb-[33px] mt-[35px]">
+                <button
+                  onClick={handleSignUp}
+                  className="text-xl text-[#7D7E82] font-semibold "
+                >
+                  إنشاء حساب
+                </button>
+                <p className="text-[#F2F2F2]">|</p>
+                <button
+                  onClick={handleLogin}
+                  className="text-xl text-[#00ADEE] font-semibold"
+                >
+                  تسجيل دخول
+                </button>
               </div>
+              <div className="w-[400px]">
+                <form onSubmit={handleSubmit} className=" w-full ">
+                  <div className="flex flex-col justify-center items-center gap-2  ">
+                    <div className="w-[95%]">
+                      <label className="font-semibold block mb-1">
+                        الايميل
+                      </label>
+                      <TextField
+                        placeholder="أدخل الإيميل"
+                        InputProps={{
+                          startAdornment: (
+                            <InputAdornment position="start">
+                              <HiOutlineMail className="text-2xl text-[#CCD2E3]" />
+                            </InputAdornment>
+                          ),
+                        }}
+                        value={formData.email}
+                        name="email"
+                        title="Email"
+                        onChange={handleInputChange}
+                        className="w-full  h-14 border-2 border-gray-300 outline-none rounded-xl  text-lg"
+                      />
+                      <p className="text-sm  text-red-500  p-2 inline-block ">
+                        {errors.email ? errors.email : ""}
+                      </p>
+                    </div>
+                    <div className="w-[95%]">
+                      <label className="font-semibold block mb-1">
+                        كلمة المرور
+                      </label>
+                      <FormControl
+                        className="w-full h-14 border-2 border-gray-300 outline-none rounded-xl text-lg"
+                        variant="outlined"
+                      >
+                        <OutlinedInput
+                          placeholder="أدخل كلمة المرور"
+                          startAdornment={
+                            <InputAdornment position="start">
+                              <CiLock className="text-2xl text-[#CCD2E3] -mr-[14px] ml-2" />
+                            </InputAdornment>
+                          }
+                          type={showPassword ? "text" : "password"}
+                          endAdornment={
+                            <InputAdornment position="end">
+                              <IconButton
+                                className="text-2xl text-[#CCD2E3] -ml-[18px]"
+                                aria-label="toggle password visibility"
+                                onClick={handleClickShowPassword}
+                                onMouseDown={handleMouseDownPassword}
+                                edge="end"
+                              >
+                                {showPassword ? (
+                                  <VisibilityOff />
+                                ) : (
+                                  <Visibility />
+                                )}
+                              </IconButton>
+                            </InputAdornment>
+                          }
+                          title="Password"
+                          onChange={handleInputChange}
+                          name="password"
+                          value={formData.password}
+                        />
+                      </FormControl>
 
-              {error ? (
-                <p className="text-lg ml-4 sm:ml-6 lg:ml-8 xl:ml-9 text-end w-full lowercase text-red-500  p-2 inline-block ">
-                  {error ? error : ""}
-                </p>
-              ) : (
-                ""
-              )}
-            </form>
-          </div>
-        </DialogContent>
+                      <p className="text-sm  text-red-500  p-2 inline-block ">
+                        {errors.password ? errors.password : ""}
+                      </p>
+                    </div>
+                  </div>
+
+                  {error ? (
+                    <p className="text-lg ml-4 sm:ml-6 lg:ml-8 xl:ml-9 text-end w-full lowercase text-red-500  p-2 inline-block ">
+                      {error ? error : ""}
+                    </p>
+                  ) : (
+                    ""
+                  )}
+                </form>
+              </div>
+            </DialogContent>
+          </>
+        ) : (
+          <>
+            <DialogContent className="rounded-xl">
+              <div className="w-[95%] mx-auto flex items-center justify-around border-b-2 border-[#F2F2F2] pb-5 mb-[33px] mt-[30px]">
+                <button
+                  onClick={handleSignUp}
+                  className="text-xl text-[#00ADEE] font-semibold "
+                >
+                  إنشاء حساب
+                </button>
+                <p className="text-[#F2F2F2]">|</p>
+                <button
+                  onClick={handleLogin}
+                  className="text-xl text-[#7D7E82] font-semibold"
+                >
+                  تسجيل دخول
+                </button>
+              </div>
+              <div className="w-[400px]">
+                <form onSubmit={handleSubmit} className=" w-full ">
+                  <div className="flex flex-col justify-center items-center ">
+                    <div className="w-[95%]">
+                      <label className="font-semibold block mb-1">الاسم</label>
+                      <TextField
+                        placeholder="أدخل الاسم"
+                        InputProps={{
+                          startAdornment: (
+                            <InputAdornment position="start">
+                              <GoPerson className="text-2xl text-[#CCD2E3]" />
+                            </InputAdornment>
+                          ),
+                        }}
+                        value={formData.name}
+                        name="name"
+                        title="Name"
+                        onChange={handleInputChange}
+                        className="w-full  h-12  border-gray-300 outline-none rounded-xl  text-lg"
+                      />
+                      <p className="text-sm  text-red-500  p-2 inline-block ">
+                        {errors.name ? errors.name : ""}
+                      </p>
+                    </div>
+
+                    <div className="w-[95%]">
+                      <label className="font-semibold block mb-1">
+                        الايميل
+                      </label>
+                      <TextField
+                        placeholder="أدخل الإيميل"
+                        InputProps={{
+                          startAdornment: (
+                            <InputAdornment position="start">
+                              <HiOutlineMail className="text-2xl text-[#CCD2E3]" />
+                            </InputAdornment>
+                          ),
+                        }}
+                        value={formData.email}
+                        name="email"
+                        title="Email"
+                        onChange={handleInputChange}
+                        className="w-full  h-14 border-2 border-gray-300 outline-none rounded-xl  text-lg"
+                      />
+                      <p className="text-sm  text-red-500  p-2 inline-block ">
+                        {errors.email ? errors.email : ""}
+                      </p>
+                    </div>
+
+                    <div className="w-[95%]">
+                      <label className="font-semibold block mb-1">
+                        رقم الجوال
+                      </label>
+                      <TextField
+                        placeholder="رقم الجوال"
+                        InputProps={{
+                          startAdornment: (
+                            <InputAdornment position="start">
+                              <BsTelephone className="text-2xl text-[#CCD2E3]" />
+                            </InputAdornment>
+                          ),
+                        }}
+                        value={formData.phoneNumber}
+                        name="phoneNumber"
+                        title="phoneNumber"
+                        onChange={handleInputChange}
+                        className="w-full  h-14 border-2 border-gray-300 outline-none rounded-xl  text-lg"
+                      />
+                      <p className="text-sm  text-red-500  p-2 inline-block ">
+                        {errors.phoneNumber ? errors.phoneNumber : ""}
+                      </p>
+                    </div>
+                    <div className="w-[95%]">
+                      <label className="font-semibold block mb-1">
+                        كلمة المرور
+                      </label>
+                      <FormControl
+                        className="w-full h-14 border-2 border-gray-300 outline-none rounded-xl text-lg"
+                        variant="outlined"
+                      >
+                        <OutlinedInput
+                          placeholder="أدخل كلمة المرور"
+                          startAdornment={
+                            <InputAdornment position="start">
+                              <CiLock className="text-2xl text-[#CCD2E3] -mr-[14px] ml-2" />
+                            </InputAdornment>
+                          }
+                          type={showPassword ? "text" : "password"}
+                          endAdornment={
+                            <InputAdornment position="end">
+                              <IconButton
+                                className="text-2xl text-[#CCD2E3] -ml-[18px]"
+                                aria-label="toggle password visibility"
+                                onClick={handleClickShowPassword}
+                                onMouseDown={handleMouseDownPassword}
+                                edge="end"
+                              >
+                                {showPassword ? (
+                                  <VisibilityOff />
+                                ) : (
+                                  <Visibility />
+                                )}
+                              </IconButton>
+                            </InputAdornment>
+                          }
+                          title="Password"
+                          onChange={handleInputChange}
+                          name="password"
+                          value={formData.password}
+                        />
+                      </FormControl>
+
+                      <p className="text-sm  text-red-500  p-2 inline-block ">
+                        {errors.password ? errors.password : ""}
+                      </p>
+                    </div>
+                  </div>
+
+                  {error ? (
+                    <p className="text-lg ml-4 sm:ml-6 lg:ml-8 xl:ml-9 text-end w-full lowercase text-red-500  p-2 inline-block ">
+                      {error ? error : ""}
+                    </p>
+                  ) : (
+                    ""
+                  )}
+                </form>
+              </div>
+            </DialogContent>
+          </>
+        )}
+
         <DialogActions className="w-[95%] mx-auto">
-          <button
-            onClick={handleSubmit}
-            className=" w-full bg-[#00ADEE] hover:bg-opacity-80 duration-150 text-white text-xl font-semibold  h-[50px] rounded-xl"
-          >
-            دخول
-          </button>
+          {isLogin ? (
+            <button
+              onClick={handleSubmit}
+              className=" w-full bg-[#00ADEE] hover:bg-opacity-80 duration-150 text-white text-xl font-semibold  h-[50px] rounded-xl"
+            >
+              دخول
+            </button>
+          ) : (
+            <button
+              onClick={handleSubmit}
+              className=" w-full bg-[#00ADEE] hover:bg-opacity-80 duration-150 text-white text-xl font-semibold  h-[50px] rounded-xl"
+            >
+              إنشاء حساب
+            </button>
+          )}
         </DialogActions>
       </Dialog>
     </div>
