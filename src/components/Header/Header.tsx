@@ -4,6 +4,8 @@ import * as React from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import MenuItems from "../Shared/MenuItems/MenuItems";
 import Container from "../Shared/Container/Container";
+import SignUp from "../SignUp/SignUp";
+import Login from "@/components/Login/Login";
 
 const Header = () => {
   return (
@@ -52,14 +54,14 @@ const Header = () => {
               className="flex sm:gap-4 gap-1 items-center  "
               options={[
                 {
-                  href: "/auth/login",
-                  content: "دخول",
-                  classNameOfLI:
-                    "hover:bg-blue-50 ease-in-out duration-150 text-[#00ADEE] font-semibold rounded-full border-2 border-[#00ADEE] w-[120px] h-[50px] pt-2 text-center md:block hidden",
+                  href: "",
+                  content: <Login />,
+                  // classNameOfLI:
+                  //   "hover:bg-blue-50 ease-in-out duration-150 text-[#00ADEE] font-semibold rounded-full border-2 border-[#00ADEE] w-[120px] h-[50px] pt-2 text-center md:block hidden",
                 },
                 {
-                  href: "/auth/register",
-                  content: "احجز الآن",
+                  href: "",
+                  content: <SignUp />,
                   classNameOfLI:
                     "bg-[#00ADEE] text-white  hidden md:block rounded-full  hover:bg-opacity-90 ease-in-out duration-150  pt-2  font-semibold text-center border-2 border-[#00ADEE] w-[120px] h-[50px]",
                 },
