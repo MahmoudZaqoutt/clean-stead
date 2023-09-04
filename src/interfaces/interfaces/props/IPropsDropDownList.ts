@@ -6,4 +6,5 @@ export interface IPropsDropDownList {
   label?: string;
   onChange?: any;
   className?: string;
+  title?: string;
 }

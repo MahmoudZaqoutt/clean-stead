@@ -1,7 +1,6 @@
 import Container from "@/components/Shared/Container/Container";
 import Image from "next/image";
 import React from "react";
-import img from "../../assets/Group143.png";
 import Link from "next/link";
 import img2 from "../../assets/Maskgroup.png";
 import TitleOfPages from "@/components/Shared/TitleOfPages/TitleOfPages";

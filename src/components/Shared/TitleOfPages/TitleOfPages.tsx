@@ -6,7 +6,9 @@ import { IPropsCard } from "@/interfaces/interfaces/props/IPropsCard";
 const TitleOfPages = (props: IPropsCard) => {
   return (
     <div className="flex items-center gap-2">
-      <p className="text-4xl font-medium mb-5">{props.title}</p>
+      <p className={`text-4xl font-medium mb-5 ${props.className}`}>
+        {props.title}
+      </p>
       <Image src={img} alt="" className="!w-[20px] !h-[34.21px] " />
     </div>
   );
