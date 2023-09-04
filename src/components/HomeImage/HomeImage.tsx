@@ -1,14 +1,10 @@
 import Link from "next/link";
 import React from "react";
 import Container from "../Shared/Container/Container";
-import homeImage from "../../assets/homeImage.png";
 
 const HomeImage = () => {
   return (
-    <div
-      className="min-h-[550px] background-I bg-cover bg-center  bg-no-repeat bg-blue-200  rounded-3xl mb-[80px]"
-      style={{ backgroundImage: `url(${homeImage})`, minHeight: "550px" }}
-    >
+    <div className="banner min-h-[550px] background-I bg-cover bg-center  bg-no-repeat  rounded-3xl mb-[80px]">
       <Container>
         <div className="pt-[100px] ">
           <p className="w-[340px]  text-5xl font-bold">

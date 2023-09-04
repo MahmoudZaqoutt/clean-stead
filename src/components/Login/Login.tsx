@@ -240,7 +240,7 @@ export default function Login() {
                   تسجيل دخول
                 </button>
               </div>
-              <div className="w-[400px]">
+              <div className="w-[430px] overflow-hidden">
                 <form onSubmit={handleSubmit} className=" w-full ">
                   <div className="flex flex-col justify-center items-center ">
                     <div className="w-[95%]">

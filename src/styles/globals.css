@@ -4,3 +4,9 @@
 body {
   direction: rtl;
 }
+.banner {
+  background-image: url("../assets/homeImage.png");
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: cover;
+}
