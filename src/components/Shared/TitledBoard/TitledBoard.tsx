@@ -14,11 +14,12 @@ const TitledBoard = (props: IPropsCard) => {
         <p className="text-2xl text-[#7D7E82] max-w-[509.38px] min-h-[312px]">
           {props.content}
         </p>
-        <Link href={""}>
+
+        <Link href={props.href}>
           <p
-            className={`${props.buttonClassName} w-[150px] h-[50px] mt-[30px] bg-white text-[#00ADEE] border-2 border-[#00ADEE]  rounded-full text-xl text-center pt-2 hover:bg-blue-50 duration-200  `}
+            className={`${props.linkClassName} w-[150px] h-[50px] mt-[30px] bg-white text-[#00ADEE] border-2 border-[#00ADEE]  rounded-full text-xl text-center pt-2 hover:bg-blue-50 duration-200  `}
           >
-            {props.buttonContent}
+            {props.linkContent}
           </p>
         </Link>
       </div>

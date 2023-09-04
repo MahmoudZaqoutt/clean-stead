@@ -10,7 +10,10 @@ export interface IPropsCard {
   Id?: number;
   img?: any;
   name?: string;
-  contentToShow?: string;
-  buttonClassName?: string;
-  buttonContent?: string;
+  contentToShow?: any;
+  linkClassName?: string;
+  linkContent?: string;
+  href?: string;
+  classNameOfTitle?: string;
+  classNameOfIcon?: string;
 }

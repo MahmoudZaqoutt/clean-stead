@@ -18,7 +18,11 @@ const ServicesCard = (props: IPropsCard) => {
       <p className="text-[#6D6E71] text-lg mt-5 w-[308.66px] mx-auto border-r-[1px] border-r-[#8FC930] pr-[10px]">
         {props.content}
       </p>
-      <ShowMore content={props.contentToShow || ""} />
+      <ShowMore
+        contentToShow={props.contentToShow || ""}
+        title="رؤية المزيد"
+        classNameOfTitle="mr-4"
+      />
     </fieldset>
   );
 };
