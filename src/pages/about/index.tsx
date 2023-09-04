@@ -7,11 +7,11 @@ import TitleOfPages from "@/components/Shared/TitleOfPages/TitleOfPages";
 const About = () => {
   return (
     <Container>
-      <div className="mb-[70px] mt-[40px] flex items-center justify-between">
+      <div className="mb-[70px] mt-[40px] flex flex-col-reverse lg:flex-row items-center gap-7 lg:justify-between ">
         <div>
           <TitleOfPages title="من نحن" />
 
-          <p className="text-2xl text-[#7D7E82] w-[509.38px] min-h-[312px]">
+          <p className="text-2xl text-[#7D7E82] max-w-[509.38px] min-h-[312px]">
             هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا
             النص من مولد النص العربى، حيث يمكنك أن تولد مثل هذا النص أو العديد
             من النصوص الأخرى إضافة إلى زيادة عدد الحروف التى يولدها التطبيق. إذا
@@ -26,7 +26,7 @@ const About = () => {
         </div>
 
         <div>
-          <Image src={img2} alt="" className="w-[570.24px] h-[550px]" />
+          <Image src={img2} alt="" className="lg:w-[570.24px] lg:h-[550px]" />
         </div>
       </div>
     </Container>
