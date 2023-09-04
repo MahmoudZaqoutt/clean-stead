@@ -11,4 +11,6 @@ export interface IPropsCard {
   img?: any;
   name?: string;
   contentToShow?: string;
+  buttonClassName?: string;
+  buttonContent?: string;
 }
