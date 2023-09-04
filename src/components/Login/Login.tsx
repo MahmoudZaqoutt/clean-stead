@@ -18,6 +18,7 @@ import { CiLock } from "react-icons/ci";
 import { useRouter } from "next/router";
 import { BsTelephone } from "react-icons/bs";
 import { GoPerson } from "react-icons/go";
+import axios from "axios";
 
 export default function Login() {
   const [open, setOpen] = React.useState(false);
@@ -30,7 +31,7 @@ export default function Login() {
   const [formData, setFormData] = React.useState({
     name: "",
     email: "",
-    phoneNumber: "",
+    phone: "",
     password: "",
   });
 
@@ -42,36 +43,77 @@ export default function Login() {
   const schema = yup.object().shape({
     name: yup.string().required("هذا الحقل مطلوب"),
     email: yup.string().email("إيميل غير صالح").required("هذا الحقل مطلوب"),
-    phoneNumber: yup.number().required("هذا الحقل مطلوب"),
+    phone: yup.number().required("هذا الحقل مطلوب"),
     password: yup.string().required("هذا الحقل مطلوب"),
   });
 
-  const handleSubmit = (event: any) => {
+  const handleLoginSubmit = async (event: any) => {
+    event.preventDefault();
+    schema
+      .validate(formData, { abortEarly: false })
+      .then()
+      .catch((error: any) => {
+        const Errors: any = {};
+        error.inner.forEach((error: any) => {
+          Errors[error.path] = error.message;
+        });
+        setErrors(Errors);
+      });
+
+    try {
+      const res = await axios.post("https://student.valuxapps.com/api/login", {
+        email: formData.email,
+        password: formData.password,
+      });
+      if (res) {
+        if (res.data.message.includes("لم")) {
+          setOpen(true);
+          setError(res.data.message);
+        } else {
+          setError(res.data.message);
+          setError("");
+          setFormData({
+            name: "",
+            email: "",
+            password: "",
+            phone: "",
+          });
+          setOpen(false);
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleRegisterSubmit = (event: any) => {
     event.preventDefault();
     schema
       .validate(formData, { abortEarly: false })
       .then(async () => {
         try {
-          const res = await fetch(
-            "http://casting-ec2-1307338951.us-east-2.elb.amazonaws.com:7001/auth/login",
-            {
-              headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json",
-              },
-              method: "POST",
-              body: JSON.stringify(formData),
-            }
+          const res = await axios.post(
+            "https://student.valuxapps.com/api/register",
+            formData
           );
           if (res) {
-            // localStorage.setItem("token", res.data.accessToken);
-            // router.push("/creator");
-            console.log(res);
+            if (res.data.message.includes("قبل")) {
+              setOpen(true);
+              setError(res.data.message);
+            } else {
+              setError(res.data.message);
+              setError("");
+              setFormData({
+                name: "",
+                email: "",
+                password: "",
+                phone: "",
+              });
+              setOpen(false);
+            }
           }
         } catch (error: any) {
-          setError(
-            error.response.data.code || "أدخلت ايميل او كلمة مرور خاطئة"
-          );
+          console.log(error);
         }
       })
       .catch((error: any) => {
@@ -82,6 +124,7 @@ export default function Login() {
         setErrors(Errors);
       });
   };
+
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -140,7 +183,7 @@ export default function Login() {
                 </button>
               </div>
               <div className="w-[400px]">
-                <form onSubmit={handleSubmit} className=" w-full ">
+                <form className=" w-full ">
                   <div className="flex flex-col justify-center items-center gap-2  ">
                     <div className="w-[95%]">
                       <label className="font-semibold block mb-1">
@@ -212,7 +255,7 @@ export default function Login() {
                   </div>
 
                   {error ? (
-                    <p className="text-lg ml-4 sm:ml-6 lg:ml-8 xl:ml-9 text-end w-full lowercase text-red-500  p-2 inline-block ">
+                    <p className="text-lg  text-center w-full lowercase text-red-500   inline-block ">
                       {error ? error : ""}
                     </p>
                   ) : (
@@ -240,8 +283,8 @@ export default function Login() {
                   تسجيل دخول
                 </button>
               </div>
-              <div className="w-[430px] overflow-hidden">
-                <form onSubmit={handleSubmit} className=" w-full ">
+              <div className="w-[400px] overflow-hidden">
+                <form className=" w-full ">
                   <div className="flex flex-col justify-center items-center ">
                     <div className="w-[95%]">
                       <label className="font-semibold block mb-1">الاسم</label>
@@ -302,14 +345,14 @@ export default function Login() {
                             </InputAdornment>
                           ),
                         }}
-                        value={formData.phoneNumber}
-                        name="phoneNumber"
-                        title="phoneNumber"
+                        value={formData.phone}
+                        name="phone"
+                        title="phone"
                         onChange={handleInputChange}
                         className="w-full  h-14 border-2 border-gray-300 outline-none rounded-xl  text-lg"
                       />
                       <p className="text-sm  text-red-500  p-2 inline-block ">
-                        {errors.phoneNumber ? errors.phoneNumber : ""}
+                        {errors.phone ? errors.phone : ""}
                       </p>
                     </div>
                     <div className="w-[95%]">
@@ -359,8 +402,8 @@ export default function Login() {
                   </div>
 
                   {error ? (
-                    <p className="text-lg ml-4 sm:ml-6 lg:ml-8 xl:ml-9 text-end w-full lowercase text-red-500  p-2 inline-block ">
-                      {error ? error : ""}
+                    <p className="text-lg  text-center w-full lowercase text-red-500   inline-block ">
+                      {error !== "" ? error : ""}
                     </p>
                   ) : (
                     ""
@@ -374,14 +417,14 @@ export default function Login() {
         <DialogActions className="w-[95%] mx-auto">
           {isLogin ? (
             <button
-              onClick={handleSubmit}
+              onClick={handleLoginSubmit}
               className=" w-full bg-[#00ADEE] hover:bg-opacity-80 duration-150 text-white text-xl font-semibold  h-[50px] rounded-xl"
             >
               دخول
             </button>
           ) : (
             <button
-              onClick={handleSubmit}
+              onClick={handleRegisterSubmit}
               className=" w-full bg-[#00ADEE] hover:bg-opacity-80 duration-150 text-white text-xl font-semibold  h-[50px] rounded-xl"
             >
               إنشاء حساب

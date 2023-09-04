@@ -9,5 +9,5 @@ export default function Home1() {
   // useEffect(() => {
   //   router.push("/login-admin");
   // }, []);
-  return <Service />;
+  return <Home />;
 }
