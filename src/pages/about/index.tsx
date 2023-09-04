@@ -4,15 +4,14 @@ import React from "react";
 import img from "../../assets/Group143.png";
 import Link from "next/link";
 import img2 from "../../assets/Maskgroup.png";
+import TitleOfPages from "@/components/Shared/TitleOfPages/TitleOfPages";
 const About = () => {
   return (
     <Container>
       <div className="mb-[70px] mt-[40px] flex items-center justify-between">
         <div>
-          <div className="flex items-center gap-2">
-            <p className="text-4xl font-medium mb-5">من نحن</p>
-            <Image src={img} alt="" className="!w-[20px] !h-[34.21px] " />
-          </div>
+          <TitleOfPages title="من نحن" />
+
           <p className="text-2xl text-[#7D7E82] w-[509.38px] min-h-[312px]">
             هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا
             النص من مولد النص العربى، حيث يمكنك أن تولد مثل هذا النص أو العديد
