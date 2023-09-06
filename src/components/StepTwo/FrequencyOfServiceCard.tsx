@@ -1,4 +1,3 @@
-import { IPropsCard } from "@/interfaces/interfaces/props/IPropsCard";
 import { IPropsDropDownList } from "@/interfaces/interfaces/props/IPropsDropDownList";
 import React from "react";
 

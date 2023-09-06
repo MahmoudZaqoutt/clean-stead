@@ -9,6 +9,7 @@ import Container from "@/components/Shared/Container/Container";
 import SummaryCard from "@/components/SummaryCard/SummaryCard";
 import StepOne from "@/components/StepOne/StepOne";
 import StepTwo from "@/components/StepTwo/StepTwo";
+import StepThree from "@/components/StepThree/StepThree";
 
 const steps = ["اختر الخدمات", "التاريخ والوقت", "معلوماتك"];
 
@@ -42,7 +43,7 @@ const Book = () => {
       case 1:
         return <StepTwo />;
       case 2:
-        return "3";
+        return <StepThree />;
       default:
         return null;
     }
