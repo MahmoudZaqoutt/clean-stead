@@ -24,7 +24,7 @@ const Service = () => {
           الخدمات المتوفرة في تنظيف المنازل
         </p>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-[30px] mb-[25px]">
+        <div className=" grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-[30px] mb-[25px]">
           {SERVICES_OF_SERVICE.map((item: any, index) => (
             <ServicesOfServiceCard
               key={index}
@@ -33,12 +33,24 @@ const Service = () => {
             />
           ))}
         </div>
-        <div className="mb-[50px]">
+        <div className="mb-[50px] ">
           <ShowMore
             title="رؤية المزيد"
-            contentToShow="any thing"
+            contentToShow={
+              <div className=" grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-[30px] mb-[25px]">
+                {SERVICES_OF_SERVICE.map((item: any, index) => (
+                  <ServicesOfServiceCard
+                    key={index}
+                    img={item.img}
+                    content={item.content}
+                  />
+                ))}
+              </div>
+            }
             classNameOfIcon="!text-black"
-            classNameOfTitle="!text-black"
+            classNameOfTitle="!text-black "
+            classNameOfSubTitle="text-black "
+            classNameOfContainer="flex items-start lg:items-center  flex-col "
           />
         </div>
       </div>

@@ -83,7 +83,7 @@ export default function ShowMore(props: IPropsCard) {
 
                 <button
                   onClick={handlebanle}
-                  className="text-[#00ADEE] text-lg  mr-[10px]"
+                  className={`text-[#00ADEE] text-lg  mr-[10px] ${props.classNameOfSubTitle}`}
                 >
                   {props.hiddenTitle ? props.hiddenTitle : props.title}
                 </button>
@@ -104,7 +104,7 @@ export default function ShowMore(props: IPropsCard) {
                 <Accordion>
                   <button
                     onClick={handlebanle}
-                    className="text-[#00ADEE] text-lg  mr-[10px]"
+                    className={`text-[#00ADEE] text-lg  mr-[10px] ${props.classNameOfSubTitle}`}
                   >
                     {props.title}
                   </button>

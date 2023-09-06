@@ -14,7 +14,7 @@ const ContactUs = () => {
   const [formData, setFormData] = React.useState({
     nameOfServices: "",
     name: "",
-    phoneNumber: "",
+    phone: "",
     message: "",
   });
 
@@ -26,7 +26,7 @@ const ContactUs = () => {
   const schema = yup.object().shape({
     name: yup.string().required("هذا الحقل مطلوب"),
     nameOfServices: yup.string().required("هذا الحقل مطلوب"),
-    phoneNumber: yup
+    phone: yup
       .number()
       .typeError("رقم الجوال يجب أن يكون رقمًا")
       .required("هذا الحقل مطلوب"),
@@ -136,15 +136,15 @@ const ContactUs = () => {
               <input
                 type="text"
                 placeholder="رقم الجوال"
-                value={formData.phoneNumber}
-                name="phoneNumber"
-                id="phoneNumber"
-                title="phoneNumber"
+                value={formData.phone}
+                name="phone"
+                id="phone"
+                title="phone"
                 onChange={handleInputChange}
                 className="border-2 border-[#F2F2F2] h-[50px] rounded-xl  px-[12px] outline-none w-full   "
               />
               <p className="text-sm  text-red-500  p-2 inline-block ">
-                {errors.phoneNumber ? errors.phoneNumber : ""}
+                {errors.phone ? errors.phone : ""}
               </p>
             </div>
           </div>

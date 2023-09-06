@@ -43,7 +43,10 @@ export default function Login() {
   const schema = yup.object().shape({
     name: yup.string().required("هذا الحقل مطلوب"),
     email: yup.string().email("إيميل غير صالح").required("هذا الحقل مطلوب"),
-    phone: yup.number().required("هذا الحقل مطلوب"),
+    phone: yup
+      .number()
+      .typeError("رقم الجوال يجب أن يكون رقمًا")
+      .required("هذا الحقل مطلوب"),
     password: yup.string().required("هذا الحقل مطلوب"),
   });
 
