@@ -1,5 +1,5 @@
 export interface IPropsDropDownList {
-  options: any[];
+  options?: any[];
   id?: any;
   name?: string;
   value?: any;

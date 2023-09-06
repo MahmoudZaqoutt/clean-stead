@@ -8,6 +8,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@/components/Shared/Container/Container";
 import SummaryCard from "@/components/SummaryCard/SummaryCard";
 import StepOne from "@/components/StepOne/StepOne";
+import StepTwo from "@/components/StepTwo/StepTwo";
 
 const steps = ["اختر الخدمات", "التاريخ والوقت", "معلوماتك"];
 
@@ -39,7 +40,7 @@ const Book = () => {
       case 0:
         return <StepOne />;
       case 1:
-        return "2";
+        return <StepTwo />;
       case 2:
         return "3";
       default:
