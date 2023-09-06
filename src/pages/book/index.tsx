@@ -7,6 +7,7 @@ import StepLabel from "@mui/material/StepLabel";
 import Typography from "@mui/material/Typography";
 import Container from "@/components/Shared/Container/Container";
 import SummaryCard from "@/components/SummaryCard/SummaryCard";
+import StepOne from "@/components/StepOne/StepOne";
 
 const steps = ["اختر الخدمات", "التاريخ والوقت", "معلوماتك"];
 
@@ -36,7 +37,7 @@ const Book = () => {
   const renderStepContent = () => {
     switch (activeStep) {
       case 0:
-        return "1";
+        return <StepOne />;
       case 1:
         return "2";
       case 2:
@@ -70,7 +71,7 @@ const Book = () => {
             ) : (
               <React.Fragment>
                 <div className="min-h-[442px] border-b-2 border-[#E5F7FD]">
-                  <div className="max-w-[708.98px] mx-auto my-[30px] bg-[#E5F7FD] min-h-[442px]">
+                  <div className="max-w-[708.98px] mx-auto my-[30px]  min-h-[442px]">
                     {renderStepContent()}
                   </div>
                 </div>

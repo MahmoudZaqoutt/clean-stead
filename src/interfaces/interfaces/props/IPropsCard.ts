@@ -1,7 +1,7 @@
 export interface IPropsCard {
   Icon?: any;
   paid?: string;
-  subTitle?: string;
+  subTitle?: any;
   title?: string;
   content?: string;
   className?: string;
@@ -16,4 +16,7 @@ export interface IPropsCard {
   href?: string;
   classNameOfTitle?: string;
   classNameOfIcon?: string;
+  classNameOfSubTitle?: string;
+  classNameOfContainer?: string;
+  hiddenTitle?: string;
 }
