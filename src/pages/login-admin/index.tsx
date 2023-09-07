@@ -21,7 +21,9 @@ const Login_admin = () => {
   const [error, setError] = useState<any>("");
   const [showPassword, setShowPassword] = React.useState(false);
   const [formData, setFormData] = useState({
+    name: "mahmoud",
     email: "",
+    phone: Math.round(Math.random() * 1000),
     password: "",
   });
 
@@ -42,14 +44,13 @@ const Login_admin = () => {
       .then(async () => {
         try {
           const res = await axios.post(
-            "http://casting-ec2-1307338951.us-east-2.elb.amazonaws.com:7001/auth/login",
+            "https://student.valuxapps.com/api/register",
             formData
           );
 
           if (res) {
-            // localStorage.setItem("token", res.data.accessToken);
-            // router.push("/creator");
-            console.log(res);
+            setError(res.data.message);
+            router.push("/home");
           }
         } catch (error: any) {
           setError(
@@ -77,7 +78,7 @@ const Login_admin = () => {
   return (
     <>
       <Container>
-        <div className="w-[400px] mx-auto mt-20">
+        <div className=" max-w-[400px] sm:w-[400px] mx-auto mt-20">
           <div className="flex items-center gap-1 w-full justify-center flex-row-reverse">
             <p className="text-3xl font-semibold">كلين ستيد</p>
             <Image
@@ -154,7 +155,7 @@ const Login_admin = () => {
             </div>
 
             {error ? (
-              <p className="text-lg ml-4 sm:ml-6 lg:ml-8 xl:ml-9 text-end w-full lowercase text-red-500  p-2 inline-block ">
+              <p className=" text-center text-lg ml-4 sm:ml-6 lg:ml-8 xl:ml-9  w-full lowercase text-red-500  p-2 inline-block ">
                 {error ? error : ""}
               </p>
             ) : (

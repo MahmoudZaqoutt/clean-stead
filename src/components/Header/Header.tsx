@@ -18,28 +18,28 @@ const Header = () => {
               options={[
                 {
                   id: 1,
-                  href: "/",
+                  href: "/home",
                   content: "الرئيسية",
                   classNameOfLI:
                     "hover:bg-blue-50 ease-in-out duration-150 p-2",
                 },
                 {
                   id: 2,
-                  href: "/services",
+                  href: "/service",
                   content: "الخدمات",
                   classNameOfLI:
                     "hover:bg-blue-50 ease-in-out duration-150 p-2",
                 },
                 {
                   id: 3,
-                  href: "/about-us",
+                  href: "/about",
                   content: "من نحن",
                   classNameOfLI:
                     "hover:bg-blue-50 ease-in-out duration-150 p-2",
                 },
                 {
                   id: 3,
-                  href: "/contact",
+                  href: "/contact-us",
                   content: " اتصل بنا",
                   classNameOfLI:
                     "hover:bg-blue-50 ease-in-out duration-150 p-2",
@@ -57,7 +57,7 @@ const Header = () => {
                   content: <Login />,
                 },
                 {
-                  href: "/",
+                  href: "/book",
                   content: "احجز الآن",
                   classNameOfLI:
                     "text-xl pb-3 bg-[#00ADEE] text-white  hidden md:block rounded-full  hover:bg-opacity-90 ease-in-out duration-150  pt-2  font-semibold text-center border-2 border-[#00ADEE] w-[120px] h-[50px]",
@@ -68,12 +68,12 @@ const Header = () => {
               className="md:hidden"
               shape={<MenuIcon className="text-4xl text-[#00ADEE]" />}
               Items={[
-                { href: "/auth/register", content: "الرئيسية " },
-                { href: "/auth/login", content: "الخدمات" },
-                { href: "/auth/login", content: "من نحن" },
-                { href: "/auth/login", content: "اتصل بنا" },
-                { href: "/auth/login", content: "دخول" },
-                { href: "/auth/login", content: "احجز الآن" },
+                { href: "/home", content: "الرئيسية " },
+                { href: "/service", content: "الخدمات" },
+                { href: "/about", content: "من نحن" },
+                { href: "/contact-us", content: "اتصل بنا" },
+                { href: "", content: "دخول" },
+                { href: "/book", content: "احجز الآن" },
               ]}
             />
           </div>

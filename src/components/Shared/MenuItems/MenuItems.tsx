@@ -34,7 +34,7 @@ const MenuItems = (props: IPropsMenuItems) => {
           "aria-labelledby": "basic-button",
         }}
       >
-        {props.Items?.map((item, index) => (
+        {props.Items?.map((item: any, index) => (
           <Link href={item.href} key={index}>
             <MenuItem onClick={handleClose} className="text-[#00ADEE]">
               {item.content}

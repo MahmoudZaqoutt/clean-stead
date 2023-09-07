@@ -128,11 +128,13 @@ export default function Login() {
       });
   };
 
-  const handleClickOpen = () => {
+  const handleClickOpen = (e: any) => {
+    e.preventDefault();
     setOpen(true);
   };
 
-  const handleClose = () => {
+  const handleClose = (e: any) => {
+    e.preventDefault();
     setOpen(false);
   };
 
@@ -185,7 +187,7 @@ export default function Login() {
                   تسجيل دخول
                 </button>
               </div>
-              <div className="w-[400px]">
+              <div className="max-w-[400px] sm:w-[400px]">
                 <form className=" w-full ">
                   <div className="flex flex-col justify-center items-center gap-2  ">
                     <div className="w-[95%]">
@@ -286,7 +288,7 @@ export default function Login() {
                   تسجيل دخول
                 </button>
               </div>
-              <div className="w-[400px] overflow-hidden">
+              <div className="max-w-[400px] sm:w-[400px]">
                 <form className=" w-full ">
                   <div className="flex flex-col justify-center items-center ">
                     <div className="w-[95%]">
