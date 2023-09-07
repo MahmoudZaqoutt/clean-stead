@@ -10,16 +10,17 @@ const ServicesForChosenCard = (props: IPropsDropDownList) => {
       <ShowMore
         title="رؤية الخدمات"
         subTitle="تنظيف المنازل"
-        classNameOfTitle="flex justify-between items-center w-full !mr-0 rounded-2xl min-h-[51.42px]"
+        classNameOfTitle="flex justify-between items-center w-full !mr-0 rounded-2xl min-h-[51.42px] max-w-[770px]"
         classNameOfSubTitle="text-lg "
         classNameOfIcon="!mt-[20px]"
         hiddenTitle="اخفاء الخدمات"
+        classNameOfDetails="max-w-[770px]"
         contentToShow={
           <div className="border-[#F2F2F2] border-2 rounded-2xl ">
             <ShowMore
               title="رؤية التفاصيل"
               subTitle={
-                <div className="flex items-center">
+                <div className="flex flex-col gap-2 lg:flex-row lg:gap-0 items-center">
                   <input
                     onChange={props.onChange}
                     type="checkbox"
@@ -32,11 +33,10 @@ const ServicesForChosenCard = (props: IPropsDropDownList) => {
                     className="w-[80px] h-[80px] mr-[20px] ml-[16px]"
                   />
                   <p className="text-lg">غرفة النوم</p>
-                  <p className="text-lg mr-[34px] ml-[64px]">15 $</p>
+                  <p className="text-lg lg:mr-[34px] lg:ml-[64px] ">15 $</p>
 
                   <div className="flex items-center gap-3 ">
                     <button
-                      name="one"
                       onClick={props.handleIncrementAmount}
                       className="w-[30px] h-[30px] bg-[#E5F7FD] rounded-md "
                     >
@@ -54,10 +54,11 @@ const ServicesForChosenCard = (props: IPropsDropDownList) => {
                   </div>
                 </div>
               }
-              classNameOfTitle="flex justify-between items-center w-full !mr-0 rounded-2xl min-h-[110px]"
+              classNameOfTitle="flex justify-between items-center w-full !mr-0 rounded-2xl min-h-[110px]  max-w-[770px]"
               classNameOfSubTitle="text-lg "
-              classNameOfIcon="!mt-[50px]"
+              classNameOfIcon="!mt-[110px] lg:!mt-[50px]"
               hiddenTitle="اخفاء التفاصيل"
+              classNameOfDetails=" max-w-[770px]"
               contentToShow={
                 <div className="pr-[50px]">
                   <p className="text-md text-[#7D7E82]">

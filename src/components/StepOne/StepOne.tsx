@@ -25,7 +25,7 @@ const StepOne = () => {
   };
 
   return (
-    <div>
+    <div className="max-w-[95%] mx-auto">
       <p className="min-w-[417px] text-xl font-medium mb-[21px]">
         اختر الخدمات التي تحتاج تنظيفها من أي تصنيف تريده
       </p>

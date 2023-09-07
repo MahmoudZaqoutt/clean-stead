@@ -7,12 +7,12 @@ const StepTwo = () => {
   };
 
   return (
-    <div>
+    <div className="max-w-[95%] mx-auto">
       <p className="text-xl font-medium mb-[21px]">اختر موعد الحجز</p>
       <div>
         <p className="text-lg">تكرار الخدمة</p>
 
-        <div className="flex items-center gap-10 mt-[6px] mb-[20px]">
+        <div className="flex flex-col sm:items-center sm:flex-row gap-5 lg:gap-10 mt-[6px] mb-[20px]">
           <FrequencyOfServiceCard
             name="مرة واحدة"
             className="w-[123.18px]"

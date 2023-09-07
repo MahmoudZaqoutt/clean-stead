@@ -119,7 +119,7 @@ export default function ShowMore(props: IPropsCard) {
             </>
           )}
         </CustomAccordionSummary>
-        <AccordionDetails>
+        <AccordionDetails className={props.classNameOfDetails}>
           <div>{props.contentToShow}</div>
         </AccordionDetails>
       </Accordion>

@@ -53,8 +53,8 @@ const Book = () => {
     <Container>
       <div className="mb-[80px]">
         <TitleOfPages title="احجز الآن" />
-        <div className="flex justify-between mt-[35px]">
-          <div className="w-[770px] min-h-[602.83px] border-[#E5F7FD] border-2 shadow-xl shadow-[#E5F7FD] rounded-2xl ">
+        <div className="flex flex-col xl:flex-row items-center xl:items-start justify-between  gap-10  mt-[35px]">
+          <div className="lg:w-[770px] sm:w-[600px] min-h-[602.83px] border-[#E5F7FD] border-2 shadow-xl shadow-[#E5F7FD] rounded-2xl ">
             <div className="border-b-2 border-[#E5F7FD] h-[70px] flex flex-col justify-center ">
               <Stepper activeStep={activeStep}>
                 {steps.map((label: any, index: number) => {
@@ -73,11 +73,11 @@ const Book = () => {
             ) : (
               <React.Fragment>
                 <div className="min-h-[442px] border-b-2 border-[#E5F7FD]">
-                  <div className="max-w-[708.98px] mx-auto my-[30px]  min-h-[442px]">
+                  <div className=" mx-auto my-[30px]  min-h-[442px]">
                     {renderStepContent()}
                   </div>
                 </div>
-                <div className=" flex justify-between items-center h-[90px] w-[708.98px] mx-auto">
+                <div className=" flex justify-between items-center h-[90px] max-w-[95%] mx-auto">
                   <button
                     disabled={activeStep === 0}
                     onClick={handleBack}

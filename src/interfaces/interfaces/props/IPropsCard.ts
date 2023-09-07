@@ -19,4 +19,5 @@ export interface IPropsCard {
   classNameOfSubTitle?: string;
   classNameOfContainer?: string;
   hiddenTitle?: string;
+  classNameOfDetails?: string;
 }
