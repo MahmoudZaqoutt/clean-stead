@@ -1,6 +1,6 @@
 export interface IPropsTitleAndSubTitle {
   title?: string;
-  subTitle?: string;
+  subTitle?: any;
   classNameOfTitle?: string;
   classNameOfSubTitle?: string;
   onChange?: any;
