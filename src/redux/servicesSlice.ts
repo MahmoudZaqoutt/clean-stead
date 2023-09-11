@@ -196,7 +196,12 @@ export const servicesSlice = createSlice({
       });
       state.book = updatedServices;
     },
-    handleDate: (state) => console.log(state),
+    handleRepetition: (state, action) => {
+      state.repetition = action.payload;
+    },
+    handleDate: (state, action) => {
+      state.date = action.payload;
+    },
   },
 });
 
@@ -205,6 +210,7 @@ export const {
   handleDecrementAmount,
   handleCheckedChange,
   handleDate,
+  handleRepetition,
 } = servicesSlice.actions;
 
 export default servicesSlice.reducer;

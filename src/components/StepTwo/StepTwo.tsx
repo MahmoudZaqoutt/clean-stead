@@ -1,9 +1,18 @@
 import React from "react";
 import FrequencyOfServiceCard from "./FrequencyOfServiceCard";
+import { useDispatch, useSelector } from "react-redux";
+import { handleDate, handleRepetition } from "@/redux/servicesSlice";
 
 const StepTwo = () => {
-  const handleInputChange = (e: any) => {
-    console.log(e.target.id);
+  const book = useSelector((state: any) => state.servicesReducer);
+  const dispatch = useDispatch();
+
+  const handleRepetitionChange = (e: any) => {
+    dispatch(handleRepetition(e.target.id));
+  };
+
+  const handleDateChange = (e: any) => {
+    dispatch(handleDate(e.target.value));
   };
 
   return (
@@ -14,31 +23,36 @@ const StepTwo = () => {
 
         <div className="flex flex-col sm:items-center sm:flex-row gap-5 lg:gap-10 mt-[6px] mb-[20px]">
           <FrequencyOfServiceCard
+            id={book.repetition}
             name="مرة واحدة"
             className="w-[123.18px]"
-            onChange={handleInputChange}
+            onChange={handleRepetitionChange}
           />
           <FrequencyOfServiceCard
+            id={book.repetition}
             name="يوميا"
             className="w-[93.97px]"
-            onChange={handleInputChange}
+            onChange={handleRepetitionChange}
           />
           <FrequencyOfServiceCard
+            id={book.repetition}
             name="اسبوعيا"
             className="w-[109.07px]"
-            onChange={handleInputChange}
+            onChange={handleRepetitionChange}
           />
           <FrequencyOfServiceCard
+            id={book.repetition}
             name="شهريا"
             className="w-[97.87px]"
-            onChange={handleInputChange}
+            onChange={handleRepetitionChange}
           />
         </div>
         <div>
           <p className="text-lg">التاريخ والوقت</p>
           <input
-            onChange={handleInputChange}
+            onChange={handleDateChange}
             placeholder="التاريخ والوقت"
+            value={book.date}
             type="date"
             id="date"
             title="date"

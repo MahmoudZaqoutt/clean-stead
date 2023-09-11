@@ -7,10 +7,9 @@ import StepLabel from "@mui/material/StepLabel";
 import Typography from "@mui/material/Typography";
 import Container from "@/components/Shared/Container/Container";
 import SummaryCard from "@/components/SummaryCard/SummaryCard";
-import StepOne from "@/components/StepOne/StepOne";
 import StepTwo from "@/components/StepTwo/StepTwo";
 import StepThree from "@/components/StepThree/StepThree";
-import ServicesForChosenCard from "@/components/StepOne/ServicesForChosenCard";
+import StepOne from "@/components/StepOne/StepOne";
 
 const steps = ["اختر الخدمات", "التاريخ والوقت", "معلوماتك"];
 
@@ -39,7 +38,7 @@ const Book = () => {
   const renderStepContent = () => {
     switch (activeStep) {
       case 0:
-        return <ServicesForChosenCard />;
+        return <StepOne />;
       case 1:
         return <StepTwo />;
       case 2:

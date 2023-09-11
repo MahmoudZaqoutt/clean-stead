@@ -11,9 +11,9 @@ const FrequencyOfServiceCard = (props: IPropsDropDownList) => {
         type="radio"
         id={props.name}
         name="input"
-        className="w-[24px] h-[24px] "
+        className="w-[24px] h-[24px]"
+        checked={props.name === props.id}
       />
-
       <label htmlFor={props.name}>{props.name}</label>
     </div>
   );
