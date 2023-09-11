@@ -10,4 +10,6 @@ export interface IPropsDropDownList {
   handleIncrementAmount?: any;
   amount?: any;
   handleDecrementAmount?: any;
+  serviceData?: any;
+  countOfServices?: any;
 }

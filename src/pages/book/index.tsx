@@ -10,13 +10,13 @@ import SummaryCard from "@/components/SummaryCard/SummaryCard";
 import StepOne from "@/components/StepOne/StepOne";
 import StepTwo from "@/components/StepTwo/StepTwo";
 import StepThree from "@/components/StepThree/StepThree";
+import ServicesForChosenCard from "@/components/StepOne/ServicesForChosenCard";
 
 const steps = ["اختر الخدمات", "التاريخ والوقت", "معلوماتك"];
 
 const Book = () => {
   const [activeStep, setActiveStep] = React.useState(0);
   const [skipped, setSkipped] = React.useState(new Set<number>());
-
   const isStepSkipped = (step: number) => {
     return skipped.has(step);
   };
@@ -39,7 +39,7 @@ const Book = () => {
   const renderStepContent = () => {
     switch (activeStep) {
       case 0:
-        return <StepOne />;
+        return <ServicesForChosenCard />;
       case 1:
         return <StepTwo />;
       case 2:
