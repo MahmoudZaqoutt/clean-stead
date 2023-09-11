@@ -1,12 +1,20 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 interface ServiceState {
+  name: string;
+  phoneNumber: string;
+  address: string;
+  Surgical_address: string;
   date: string;
   repetition: string;
   book: any;
 }
 
 const initialState: ServiceState = {
+  name: "",
+  phoneNumber: "",
+  address: "",
+  Surgical_address: "",
   date: "",
   repetition: "",
   book: [
@@ -202,6 +210,23 @@ export const servicesSlice = createSlice({
     handleDate: (state, action) => {
       state.date = action.payload;
     },
+    handleName: (state, action) => {
+      state.name = action.payload;
+    },
+    handlePhoneNumber: (state, action) => {
+      state.phoneNumber = action.payload;
+    },
+    handleAddress: (state, action) => {
+      state.address = action.payload;
+    },
+    handleSurgical_address: (state, action) => {
+      state.Surgical_address = action.payload;
+    },
+    handleBackToFirstStep: () => {
+      return {
+        ...initialState,
+      };
+    },
   },
 });
 
@@ -211,6 +236,11 @@ export const {
   handleCheckedChange,
   handleDate,
   handleRepetition,
+  handleName,
+  handlePhoneNumber,
+  handleAddress,
+  handleSurgical_address,
+  handleBackToFirstStep,
 } = servicesSlice.actions;
 
 export default servicesSlice.reducer;

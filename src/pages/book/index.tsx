@@ -10,12 +10,16 @@ import SummaryCard from "@/components/SummaryCard/SummaryCard";
 import StepTwo from "@/components/StepTwo/StepTwo";
 import StepThree from "@/components/StepThree/StepThree";
 import StepOne from "@/components/StepOne/StepOne";
+import { useRouter } from "next/router";
+import { useDispatch } from "react-redux";
+import { handleBackToFirstStep } from "@/redux/servicesSlice";
 
 const steps = ["اختر الخدمات", "التاريخ والوقت", "معلوماتك"];
 
 const Book = () => {
   const [activeStep, setActiveStep] = React.useState(0);
   const [skipped, setSkipped] = React.useState(new Set<number>());
+  const dispatch = useDispatch();
   const isStepSkipped = (step: number) => {
     return skipped.has(step);
   };
@@ -26,8 +30,13 @@ const Book = () => {
       newSkipped = new Set(newSkipped.values());
       newSkipped.delete(activeStep);
     }
+    if (activeStep === steps.length - 1) {
+      setActiveStep(0);
+      dispatch(handleBackToFirstStep());
+    } else {
+      setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    }
 
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
     setSkipped(newSkipped);
   };
 
@@ -67,7 +76,7 @@ const Book = () => {
             </div>
             {activeStep === steps.length ? (
               <React.Fragment>
-                <Typography>All steps completed</Typography>
+                <>good</>
               </React.Fragment>
             ) : (
               <React.Fragment>

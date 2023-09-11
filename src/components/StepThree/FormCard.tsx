@@ -9,8 +9,9 @@ const FormCard = (props: IPropsDropDownList) => {
         onChange={props.onChange}
         placeholder={props.name}
         type="text"
-        id={props.name}
+        name={props.name}
         className="w-[270px] h-[50px] outline-none border-2 border-[#F2F2F2] rounded-lg pr-2"
+        value={props.value}
       />
     </div>
   );
