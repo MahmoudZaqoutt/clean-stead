@@ -8,6 +8,7 @@ export interface IPropsCard {
   iconStatus?: any;
   status?: any;
   Id?: number;
+  activeId?: number;
   img?: any;
   name?: string;
   contentToShow?: any;
@@ -20,4 +21,5 @@ export interface IPropsCard {
   classNameOfContainer?: string;
   hiddenTitle?: string;
   classNameOfDetails?: string;
+  onClick?: any;
 }
