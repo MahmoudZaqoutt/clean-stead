@@ -1,28 +1,51 @@
 import TitleOfPages from "@/components/Shared/TitleOfPages/TitleOfPages";
-import React from "react";
+import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
-import Typography from "@mui/material/Typography";
 import Container from "@/components/Shared/Container/Container";
 import SummaryCard from "@/components/SummaryCard/SummaryCard";
 import StepTwo from "@/components/StepTwo/StepTwo";
 import StepThree from "@/components/StepThree/StepThree";
 import StepOne from "@/components/StepOne/StepOne";
-import { useRouter } from "next/router";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { handleBackToFirstStep } from "@/redux/servicesSlice";
 
 const steps = ["اختر الخدمات", "التاريخ والوقت", "معلوماتك"];
 
 const Book = () => {
   const [activeStep, setActiveStep] = React.useState(0);
+  const [error, setError] = useState("");
   const [skipped, setSkipped] = React.useState(new Set<number>());
   const dispatch = useDispatch();
+  const countOfServices = useSelector(
+    (state: any) => state.servicesReducer.book
+  );
   const isStepSkipped = (step: number) => {
     return skipped.has(step);
   };
+
+  // const handleNext = () => {
+  //   let newSkipped = skipped;
+  //   if (isStepSkipped(activeStep)) {
+  //     newSkipped = new Set(newSkipped.values());
+  //     newSkipped.delete(activeStep);
+  //   }
+  //   if (activeStep === steps.length - 1) {
+  //     countOfServices.find((item: any) =>
+  //       item.countOfServices <= 0
+  //         ? setError("الرجاء اختيار خدمة على الأقل ...")
+  //         : ""
+  //     );
+  //     setActiveStep(0);
+  //     dispatch(handleBackToFirstStep());
+  //   } else {
+  //     setActiveStep((prevActiveStep) => prevActiveStep + 1);
+  //   }
+
+  //   setSkipped(newSkipped);
+  // };
 
   const handleNext = () => {
     let newSkipped = skipped;
@@ -30,7 +53,17 @@ const Book = () => {
       newSkipped = new Set(newSkipped.values());
       newSkipped.delete(activeStep);
     }
+
     if (activeStep === steps.length - 1) {
+      const selectedService = countOfServices.find(
+        (item: any) => item.countOfServices > 0
+      );
+
+      if (!selectedService) {
+        setError("الرجاء اختيار خدمة على الأقل ...");
+        return;
+      }
+
       setActiveStep(0);
       dispatch(handleBackToFirstStep());
     } else {
@@ -42,6 +75,7 @@ const Book = () => {
 
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
+    setError("");
   };
 
   const renderStepContent = () => {
@@ -61,6 +95,11 @@ const Book = () => {
     <Container>
       <div className="mb-[80px]">
         <TitleOfPages title="احجز الآن" />
+        {error ? (
+          <p className="mt-5 text-xl text-red-500 font-semibold">{error}</p>
+        ) : (
+          ""
+        )}
         <div className="flex flex-col xl:flex-row items-center xl:items-start justify-between  gap-10  mt-[35px]">
           <div className="lg:w-[770px] sm:w-[600px] min-h-[602.83px] border-[#E5F7FD] border-2 shadow-xl shadow-[#E5F7FD] rounded-2xl ">
             <div className="border-b-2 border-[#E5F7FD] h-[70px] flex flex-col justify-center ">

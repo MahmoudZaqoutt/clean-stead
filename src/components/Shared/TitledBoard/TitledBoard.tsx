@@ -1,11 +1,12 @@
 import React from "react";
 import TitleOfPages from "../TitleOfPages/TitleOfPages";
-import { Link } from "@mui/material";
 import Image from "next/image";
 import img2 from "../../../assets/Maskgroup.png";
 import { IPropsCard } from "@/interfaces/interfaces/props/IPropsCard";
+import { useRouter } from "next/router";
 
 const TitledBoard = (props: IPropsCard) => {
+  const router = useRouter();
   return (
     <div className="mb-[70px] mt-[40px] flex flex-col-reverse lg:flex-row items-center gap-7 lg:justify-between ">
       <div>
@@ -15,13 +16,13 @@ const TitledBoard = (props: IPropsCard) => {
           {props.content}
         </p>
 
-        <Link href={props.href}>
+        <button onClick={() => router.push(props.href || "")}>
           <p
             className={`${props.linkClassName} w-[150px] h-[50px] mt-[30px] bg-white text-[#00ADEE] border-2 border-[#00ADEE]  rounded-full text-xl text-center pt-2 hover:bg-blue-50 duration-200  `}
           >
             {props.linkContent}
           </p>
-        </Link>
+        </button>
       </div>
 
       <div>
