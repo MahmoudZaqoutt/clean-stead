@@ -6,12 +6,13 @@ import contactImg from "../../assets/contactImg.svg";
 import maskImg from "../../assets/Mask.svg";
 import servicesImg from "../../assets/services.svg";
 import SideBarOption from "./sideBar/SideBarOption";
-import Book from "../book";
 import ContactUs from "../contact-us";
 import Image from "next/image";
 import mes from "../../assets/mes.svg";
 import personImg from "../../assets/_header.png";
 import { OverViewPage } from "@/components/OverViewPage/OverViewPage";
+import BookPage from "@/components/BookPage/BookPage";
+
 const index = () => {
   const [activeButtonId, setActiveButtonId] = useState<any>();
   const [componentToDisplay, setComponentToDisplay] = useState<any>();
@@ -23,16 +24,26 @@ const index = () => {
         setComponentToDisplay(<OverViewPage />);
         break;
       case 2:
-        setComponentToDisplay(<Book />);
+        setComponentToDisplay(<BookPage />);
         break;
       case 3:
-        setComponentToDisplay(<Book />);
+        setComponentToDisplay(<ContactUs />);
         break;
       case 4:
-        setComponentToDisplay(<Book />);
+        setComponentToDisplay(
+          <p className="text-4xl font-semibold flex justify-center items-center">
+            {" "}
+            ... coming soon{" "}
+          </p>
+        );
         break;
       case 5:
-        setComponentToDisplay(<ContactUs />);
+        setComponentToDisplay(
+          <p className="text-4xl font-semibold flex justify-center items-center">
+            {" "}
+            ... coming soon{" "}
+          </p>
+        );
         break;
       default:
         setComponentToDisplay(null);
@@ -99,9 +110,7 @@ const index = () => {
         </div>
         {/* title */}
 
-        <div>
-          <OverViewPage />
-        </div>
+        <div>{<BookPage />}</div>
       </div>
     </div>
   );
