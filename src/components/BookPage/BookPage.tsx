@@ -13,6 +13,8 @@ import acceptableImg from "../../assets/Icon3.svg";
 import unacceptableImg from "../../assets/Icon4.svg";
 import editImage from "../../assets/Edit.svg";
 import deleteImage from "../../assets/delete.svg";
+import mes from "../../assets/mes.svg";
+import personImg from "../../assets/_header.png";
 
 function createData(
   numberOfBook: number,
@@ -72,6 +74,17 @@ const rows = [
 const BookPage = () => {
   return (
     <div>
+      <div className="mt-[35px] flex justify-between items-center mb-[53px]">
+        <p className="font-bold text-3xl">الحجوزات</p>
+        <div className="flex items-center gap-4">
+          <div className="w-[45px] h-[45px] bg-white rounded-xl flex justify-center items-center">
+            <Image src={mes} alt="" className="w-[16px] h-[16px]" />
+          </div>
+          <Image src={personImg} alt="" className="w-[44px] h-[44px]" />
+          <p className="text-sm font-medium">محمود زقوت</p>
+        </div>
+      </div>
+
       <div className="flex items-center justify-between h-[60px] bg-white px-[15px] rounded-xl">
         <div className="w-[272.63px] h-[45px] border-2 border-[#F2F2F2] rounded-xl flex items-center pr-3 bg-white">
           <BsSearch className="w-[15px] h-[15px] text-[#C5C7CD]" />

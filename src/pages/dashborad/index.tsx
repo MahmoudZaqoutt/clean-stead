@@ -7,14 +7,11 @@ import maskImg from "../../assets/Mask.svg";
 import servicesImg from "../../assets/services.svg";
 import SideBarOption from "./sideBar/SideBarOption";
 import ContactUs from "../contact-us";
-import Image from "next/image";
-import mes from "../../assets/mes.svg";
-import personImg from "../../assets/_header.png";
 import { OverViewPage } from "@/components/OverViewPage/OverViewPage";
 import BookPage from "@/components/BookPage/BookPage";
 
 const index = () => {
-  const [activeButtonId, setActiveButtonId] = useState<any>();
+  const [activeButtonId, setActiveButtonId] = useState<any>(1);
   const [componentToDisplay, setComponentToDisplay] = useState<any>();
 
   const handleButtonClick = (id: number) => {
@@ -97,20 +94,11 @@ const index = () => {
       </div>
 
       <div className="bg-[#F7F8FC] col-span-8 px-[30px]">
-        {/* title */}
-        <div className="mt-[35px] flex justify-between items-center mb-[53px]">
-          <p className="font-bold text-3xl">نظرة عامة</p>
-          <div className="flex items-center gap-4">
-            <div className="w-[45px] h-[45px] bg-white rounded-xl flex justify-center items-center">
-              <Image src={mes} alt="" className="w-[16px] h-[16px]" />
-            </div>
-            <Image src={personImg} alt="" className="w-[44px] h-[44px]" />
-            <p className="text-sm font-medium">محمود زقوت</p>
-          </div>
-        </div>
-        {/* title */}
-
-        <div>{<BookPage />}</div>
+        {activeButtonId === 1 ? (
+          <OverViewPage />
+        ) : (
+          <div>{componentToDisplay}</div>
+        )}
       </div>
     </div>
   );
