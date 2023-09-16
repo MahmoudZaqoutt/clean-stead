@@ -11,9 +11,10 @@ import {
 
 const StepThree = () => {
   const dispatch = useDispatch();
-  const { name, phoneNumber, address, Surgical_address } = useSelector(
-    (state: any) => state.servicesReducer
+  const personalInfo = useSelector(
+    (state: any) => state.servicesReducer.Booking
   );
+  console.log(personalInfo);
 
   const handleNameChange = (e: any) => {
     dispatch(handleName(e.target.value));
@@ -37,24 +38,33 @@ const StepThree = () => {
         </Link>
       </p>
 
-      <div className="max-w-[570px] min-h-[196.96px] grid grid-cols-1 sm:grid-cols-2 gap-[20px] sm:gap-[30px]">
-        <FormCard name="الاسم" onChange={handleNameChange} value={name} />
-        <FormCard
-          name="رقم الجوال"
-          onChange={handlePhoneNumberChange}
-          value={phoneNumber}
-        />
-        <FormCard
-          name="العنوان"
-          onChange={handleAddressChange}
-          value={address}
-        />
-        <FormCard
-          name="العنوان التفصيلي"
-          onChange={handleSurgical_addressChange}
-          value={Surgical_address}
-        />
-      </div>
+      {personalInfo.map((item: any, index: number) => (
+        <div
+          key={index}
+          className="max-w-[570px] min-h-[196.96px] grid grid-cols-1 sm:grid-cols-2 gap-[20px] sm:gap-[30px]"
+        >
+          <FormCard
+            name="الاسم"
+            onChange={handleNameChange}
+            value={item.name}
+          />
+          <FormCard
+            name="رقم الجوال"
+            onChange={handlePhoneNumberChange}
+            value={item.phoneNumber}
+          />
+          <FormCard
+            name="العنوان"
+            onChange={handleAddressChange}
+            value={item.address}
+          />
+          <FormCard
+            name="العنوان التفصيلي"
+            onChange={handleSurgical_addressChange}
+            value={item.Surgical_address}
+          />
+        </div>
+      ))}
     </div>
   );
 };

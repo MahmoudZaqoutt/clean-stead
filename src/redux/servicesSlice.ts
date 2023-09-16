@@ -1,22 +1,26 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 interface ServiceState {
-  name: string;
-  phoneNumber: string;
-  address: string;
-  Surgical_address: string;
-  date: string;
-  repetition: string;
   book: any;
+  Booking: any;
 }
 
 const initialState: ServiceState = {
-  name: "",
-  phoneNumber: "",
-  address: "",
-  Surgical_address: "",
-  date: "",
-  repetition: "",
+  Booking: [
+    {
+      id: 0,
+      bookingNumber: "6351",
+      name: "John Doe",
+      phoneNumber: "123-456-7890",
+      address: "123 Main St",
+      Surgical_address: "456 Surgery St",
+      date: "2023-09-16",
+      repetition: "شهريا",
+      status: "pending",
+      totalPrice: 50,
+    },
+  ],
+
   book: [
     {
       id: 0,
@@ -132,8 +136,7 @@ const initialState: ServiceState = {
     },
   ],
 };
-
-export const servicesSlice = createSlice({
+export const servicesSlice: any = createSlice({
   name: "service",
   initialState,
   reducers: {
@@ -204,28 +207,33 @@ export const servicesSlice = createSlice({
       });
       state.book = updatedServices;
     },
+    handleDeleteBooking: (state, action) => {
+      const bookingIdToDelete = action.payload;
+      state.Booking = state.Booking.filter(
+        (booking: any) => booking.id !== bookingIdToDelete
+      );
+    },
+
     handleRepetition: (state, action) => {
-      state.repetition = action.payload;
+      state.Booking[0].repetition = action.payload;
     },
     handleDate: (state, action) => {
-      state.date = action.payload;
+      state.Booking[0].date = action.payload;
     },
     handleName: (state, action) => {
-      state.name = action.payload;
+      state.Booking[0].name = action.payload;
     },
     handlePhoneNumber: (state, action) => {
-      state.phoneNumber = action.payload;
+      state.Booking[0].phoneNumber = action.payload;
     },
     handleAddress: (state, action) => {
-      state.address = action.payload;
+      state.Booking[0].address = action.payload;
     },
     handleSurgical_address: (state, action) => {
-      state.Surgical_address = action.payload;
+      state.Booking[0].Surgical_address = action.payload;
     },
-    handleBackToFirstStep: () => {
-      return {
-        ...initialState,
-      };
+    handleBackToFirstStep: (state) => {
+      return initialState;
     },
   },
 });
@@ -241,6 +249,7 @@ export const {
   handleAddress,
   handleSurgical_address,
   handleBackToFirstStep,
+  handleDeleteBooking,
 } = servicesSlice.actions;
 
 export default servicesSlice.reducer;

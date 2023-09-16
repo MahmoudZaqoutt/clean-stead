@@ -19,33 +19,10 @@ const Book = () => {
   const [error, setError] = useState("");
   const [skipped, setSkipped] = React.useState(new Set<number>());
   const dispatch = useDispatch();
-  const countOfServices = useSelector(
-    (state: any) => state.servicesReducer.book
-  );
+  const data = useSelector((state: any) => state.servicesReducer);
   const isStepSkipped = (step: number) => {
     return skipped.has(step);
   };
-
-  // const handleNext = () => {
-  //   let newSkipped = skipped;
-  //   if (isStepSkipped(activeStep)) {
-  //     newSkipped = new Set(newSkipped.values());
-  //     newSkipped.delete(activeStep);
-  //   }
-  //   if (activeStep === steps.length - 1) {
-  //     countOfServices.find((item: any) =>
-  //       item.countOfServices <= 0
-  //         ? setError("الرجاء اختيار خدمة على الأقل ...")
-  //         : ""
-  //     );
-  //     setActiveStep(0);
-  //     dispatch(handleBackToFirstStep());
-  //   } else {
-  //     setActiveStep((prevActiveStep) => prevActiveStep + 1);
-  //   }
-
-  //   setSkipped(newSkipped);
-  // };
 
   const handleNext = () => {
     let newSkipped = skipped;
@@ -55,12 +32,16 @@ const Book = () => {
     }
 
     if (activeStep === steps.length - 1) {
-      const selectedService = countOfServices.find(
+      dispatch(handleBackToFirstStep());
+      const selectedService = data.book.find(
         (item: any) => item.countOfServices > 0
       );
 
       if (!selectedService) {
         setError("الرجاء اختيار خدمة على الأقل ...");
+        setTimeout(() => {
+          setError("");
+        }, 2000);
         return;
       }
 

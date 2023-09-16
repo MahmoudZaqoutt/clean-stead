@@ -11,7 +11,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <Head>
         <title>Clean Stead</title>
       </Head>
-      {/* <Header /> */}
+      <Header />
       <Provider store={store}>
         <Component {...pageProps} />
       </Provider>

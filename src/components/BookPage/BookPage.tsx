@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { BsSearch } from "react-icons/bs";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -15,63 +15,73 @@ import editImage from "../../assets/Edit.svg";
 import deleteImage from "../../assets/delete.svg";
 import mes from "../../assets/mes.svg";
 import personImg from "../../assets/_header.png";
-
-function createData(
-  numberOfBook: number,
-  name: string,
-  address: string,
-  price: string,
-  time: string,
-  repetitionOfWork: string,
-  status: any,
-  action: any
-) {
-  return {
-    numberOfBook,
-    name,
-    address,
-    price,
-    time,
-    repetitionOfWork,
-    status,
-    action,
-  };
-}
-
-const rows = [
-  createData(
-    6351,
-    "محمد الهبيل",
-    "النصر, شارع النصر",
-    "150$",
-    "22/5/2022 | 09:30 AM",
-    "مره واحده",
-    "pending",
-    "delete"
-  ),
-  createData(
-    6351,
-    "محمد الهبيل",
-    "النصر, شارع النصر",
-    "150$",
-    "22/5/2022 | 09:30 AM",
-    "مره واحده",
-    "acceptable",
-    "delete"
-  ),
-  createData(
-    6351,
-    "محمد الهبيل",
-    "النصر, شارع النصر",
-    "150$",
-    "22/5/2022 | 09:30 AM",
-    "مره واحده",
-    "unacceptable",
-    "delete"
-  ),
-];
+import { useDispatch, useSelector } from "react-redux";
+import { handleDeleteBooking } from "@/redux/servicesSlice";
 
 const BookPage = () => {
+  const [searchManually, setSearchManually] = useState(false);
+  const [allButtonColor, setAllButtonColor] = useState("blue");
+  const [pendingButtonColor, setPendingButtonColor] = useState("white");
+  const [acceptableButtonColor, setAcceptableButtonColor] = useState("white");
+  const [unacceptableButtonColor, setUnacceptableButtonColor] =
+    useState("white");
+
+  const Booking = useSelector((state: any) => state.servicesReducer.Booking);
+  const dispatch = useDispatch();
+  const [bookingData, setBookingData] = useState(Booking);
+
+  const handleDeleteBook = (id: number) => {
+    dispatch(handleDeleteBooking(id));
+  };
+
+  const handleInputChange = (e: any) => {
+    setBookingData(
+      Booking.filter(
+        (item: any) =>
+          item.name.toLowerCase().includes(e.target.value.toLowerCase()) ||
+          item.bookingNumber.includes(e.target.value)
+      )
+    );
+    setSearchManually(true);
+  };
+
+  const handleAllBookings = () => {
+    setAllButtonColor("blue");
+    setPendingButtonColor("white");
+    setAcceptableButtonColor("white");
+    setUnacceptableButtonColor("white");
+    setBookingData(Booking);
+  };
+
+  const handlePendingBookings = () => {
+    setAllButtonColor("white");
+    setPendingButtonColor("blue");
+    setAcceptableButtonColor("white");
+    setUnacceptableButtonColor("white");
+    setSearchManually(true);
+    setBookingData(Booking.filter((item: any) => item.status === "pending"));
+  };
+
+  const handleAcceptableBookings = () => {
+    setAllButtonColor("white");
+    setPendingButtonColor("white");
+    setAcceptableButtonColor("blue");
+    setUnacceptableButtonColor("white");
+    setSearchManually(true);
+    setBookingData(Booking.filter((item: any) => item.status === "acceptable"));
+  };
+
+  const handleUnAcceptableBookings = () => {
+    setAllButtonColor("white");
+    setPendingButtonColor("white");
+    setAcceptableButtonColor("white");
+    setUnacceptableButtonColor("blue");
+    setSearchManually(true);
+    setBookingData(
+      Booking.filter((item: any) => item.status === "unacceptable")
+    );
+  };
+
   return (
     <div>
       <div className="mt-[35px] flex justify-between items-center mb-[53px]">
@@ -89,6 +99,7 @@ const BookPage = () => {
         <div className="w-[272.63px] h-[45px] border-2 border-[#F2F2F2] rounded-xl flex items-center pr-3 bg-white">
           <BsSearch className="w-[15px] h-[15px] text-[#C5C7CD]" />
           <input
+            onChange={handleInputChange}
             placeholder="1565 او محمد الهبيل .."
             type="text"
             title="search"
@@ -97,16 +108,42 @@ const BookPage = () => {
         </div>
 
         <div className="flex items-center">
-          <button className="text-[#00ADEE] w-[100px] h-[45px] bg-[#EBF8FE] rounded-xl">
+          <button
+            onClick={handleAllBookings}
+            className={`text-[#808080] w-[100px] h-[45px] rounded-xl ${
+              allButtonColor === "blue" ? "bg-[#EBF8FE] !text-[#00ADEE]" : ""
+            }`}
+          >
             الكل
           </button>
-          <button className="text-[#808080] w-[100px] h-[45px]  rounded-xl">
+          <button
+            onClick={handlePendingBookings}
+            className={`text-[#808080] w-[100px] h-[45px] rounded-xl ${
+              pendingButtonColor === "blue"
+                ? "bg-[#EBF8FE] !text-[#00ADEE]"
+                : ""
+            }`}
+          >
             معلق
           </button>
-          <button className="text-[#808080] w-[100px] h-[45px]  rounded-xl">
+          <button
+            onClick={handleAcceptableBookings}
+            className={`text-[#808080] w-[100px] h-[45px] rounded-xl ${
+              acceptableButtonColor === "blue"
+                ? "bg-[#EBF8FE] !text-[#00ADEE]"
+                : ""
+            }`}
+          >
             تم تأكيده
           </button>
-          <button className="text-[#808080] w-[100px] h-[45px]  rounded-xl">
+          <button
+            onClick={handleUnAcceptableBookings}
+            className={`text-[#808080] w-[100px] h-[45px] rounded-xl ${
+              unacceptableButtonColor === "blue"
+                ? "bg-[#EBF8FE] !text-[#00ADEE]"
+                : ""
+            }`}
+          >
             تم رفضه
           </button>
         </div>
@@ -128,100 +165,185 @@ const BookPage = () => {
           <Table className="">
             <TableHead>
               <TableRow>
-                <TableCell className="text-[#9FA2B4] text-center">
+                <TableCell className="!text-[#9FA2B4] !text-center">
                   رقم الحجز
                 </TableCell>
-                <TableCell className="text-[#9FA2B4] text-center">
+                <TableCell className="!text-[#9FA2B4] !text-center">
                   الاسم
                 </TableCell>
-                <TableCell className="text-[#9FA2B4] text-center">
+                <TableCell className="!text-[#9FA2B4] !text-center">
                   العنوان
                 </TableCell>
-                <TableCell className="text-[#9FA2B4] text-center">
+                <TableCell className="!text-[#9FA2B4] !text-center">
                   السعر
                 </TableCell>
-                <TableCell className="text-[#9FA2B4] text-center">
+                <TableCell className="!text-[#9FA2B4] !text-center">
                   الوقت
                 </TableCell>
-                <TableCell className="text-[#9FA2B4] text-center">
+                <TableCell className="!text-[#9FA2B4] !text-center">
                   تكرار العمل
                 </TableCell>
-                <TableCell className="text-[#9FA2B4] text-center">
+                <TableCell className="!text-[#9FA2B4] !text-center">
                   الحالة
                 </TableCell>
-                <TableCell className="text-[#9FA2B4] text-center">
+                <TableCell className="!text-[#9FA2B4] !text-center">
                   اكشن
                 </TableCell>
               </TableRow>
             </TableHead>
-            <TableBody>
-              {rows.map((row: any, index: number) => (
-                <TableRow key={index}>
-                  <TableCell className=" text-center">
-                    {row.numberOfBook}
-                  </TableCell>
-                  <TableCell className=" text-center">{row.name}</TableCell>
-                  <TableCell className=" text-center">{row.address}</TableCell>
-                  <TableCell className=" text-center">{row.price}</TableCell>
-                  <TableCell className=" text-center">{row.time}</TableCell>
-                  <TableCell className=" text-center">
-                    {row.repetitionOfWork}
-                  </TableCell>
-                  <TableCell className=" text-center">
-                    {row.status === "pending" ? (
-                      <div className="flex items-center gap-2 rounded-lg  h-[34.67px] justify-center bg-[#FFF3E8]">
-                        <Image
-                          src={pendingImg}
-                          alt=""
-                          className="w-[15px] h-[15px]"
-                        />
-                        <p>معلق</p>
+            {searchManually ? (
+              <TableBody>
+                {bookingData.map((row: any, index: number) => (
+                  <TableRow key={index}>
+                    <TableCell className=" !text-center">
+                      {row.bookingNumber}
+                    </TableCell>
+                    <TableCell className=" !text-center">{row.name}</TableCell>
+                    <TableCell className=" !text-center">
+                      {row.address}
+                    </TableCell>
+                    <TableCell className=" !text-center">
+                      $ {row.totalPrice}
+                    </TableCell>
+                    <TableCell className=" !text-center">{row.date}</TableCell>
+                    <TableCell className=" !text-center">
+                      {row.repetition}
+                    </TableCell>
+                    <TableCell className=" !text-center">
+                      {row.status === "pending" ? (
+                        <div className="flex items-center gap-2 rounded-lg  h-[34.67px] justify-center bg-[#FFF3E8]">
+                          <Image
+                            src={pendingImg}
+                            alt=""
+                            className="w-[15px] h-[15px]"
+                          />
+                          <p>معلق</p>
+                        </div>
+                      ) : (
+                        <>
+                          {row.status === "acceptable" ? (
+                            <div className="flex items-center gap-2 rounded-lg  h-[34.67px] justify-center bg-[#E5F8EE]">
+                              <Image
+                                src={acceptableImg}
+                                alt=""
+                                className="w-[15px] h-[15px]"
+                              />
+                              <p>مقبول</p>
+                            </div>
+                          ) : (
+                            <>
+                              {row.status === "unacceptable" ? (
+                                <div className="flex items-center gap-2 rounded-lg  h-[34.67px] justify-center bg-[#FCEAEB]">
+                                  <Image
+                                    src={unacceptableImg}
+                                    alt=""
+                                    className="w-[15px] h-[15px]"
+                                  />
+                                  <p>مرفوض</p>
+                                </div>
+                              ) : (
+                                ""
+                              )}
+                            </>
+                          )}
+                        </>
+                      )}
+                    </TableCell>
+                    <TableCell className=" text-center">
+                      <div className="flex items-center justify-center gap-2">
+                        <button className="w-[35px] h-[35px] bg-[#F7F8FC] rounded-lg flex justify-center items-center">
+                          <Image src={editImage} alt="" />
+                          {""}
+                        </button>
+                        <button
+                          onClick={() => handleDeleteBook(row.id)}
+                          className="w-[35px] h-[35px] bg-[#F7F8FC] rounded-lg flex justify-center items-center"
+                        >
+                          <Image src={deleteImage} alt="" />
+                          {""}
+                        </button>
                       </div>
-                    ) : (
-                      <>
-                        {row.status === "acceptable" ? (
-                          <div className="flex items-center gap-2 rounded-lg  h-[34.67px] justify-center bg-[#E5F8EE]">
-                            <Image
-                              src={acceptableImg}
-                              alt=""
-                              className="w-[15px] h-[15px]"
-                            />
-                            <p>مقبول</p>
-                          </div>
-                        ) : (
-                          <>
-                            {row.status === "unacceptable" ? (
-                              <div className="flex items-center gap-2 rounded-lg  h-[34.67px] justify-center bg-[#FCEAEB]">
-                                <Image
-                                  src={unacceptableImg}
-                                  alt=""
-                                  className="w-[15px] h-[15px]"
-                                />
-                                <p>مرفوض</p>
-                              </div>
-                            ) : (
-                              ""
-                            )}
-                          </>
-                        )}
-                      </>
-                    )}
-                  </TableCell>
-                  <TableCell className=" text-center">
-                    <div className="flex items-center justify-center gap-2">
-                      <button className="w-[35px] h-[35px] bg-[#F7F8FC] rounded-lg flex justify-center items-center">
-                        <Image src={editImage} alt="" />
-                        {""}
-                      </button>
-                      <button className="w-[35px] h-[35px] bg-[#F7F8FC] rounded-lg flex justify-center items-center">
-                        <Image src={deleteImage} alt="" />
-                        {""}
-                      </button>
-                    </div>
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            ) : (
+              <TableBody>
+                {Booking.map((row: any, index: number) => (
+                  <TableRow key={index}>
+                    <TableCell className=" !text-center">
+                      {row.bookingNumber}
+                    </TableCell>
+                    <TableCell className=" !text-center">{row.name}</TableCell>
+                    <TableCell className=" !text-center">
+                      {row.address}
+                    </TableCell>
+                    <TableCell className=" !text-center">
+                      $ {row.totalPrice}
+                    </TableCell>
+                    <TableCell className=" !text-center">{row.date}</TableCell>
+                    <TableCell className=" !text-center">
+                      {row.repetition}
+                    </TableCell>
+                    <TableCell className=" !text-center">
+                      {row.status === "pending" ? (
+                        <div className="flex items-center gap-2 rounded-lg  h-[34.67px] justify-center bg-[#FFF3E8]">
+                          <Image
+                            src={pendingImg}
+                            alt=""
+                            className="w-[15px] h-[15px]"
+                          />
+                          <p>معلق</p>
+                        </div>
+                      ) : (
+                        <>
+                          {row.status === "acceptable" ? (
+                            <div className="flex items-center gap-2 rounded-lg  h-[34.67px] justify-center bg-[#E5F8EE]">
+                              <Image
+                                src={acceptableImg}
+                                alt=""
+                                className="w-[15px] h-[15px]"
+                              />
+                              <p>مقبول</p>
+                            </div>
+                          ) : (
+                            <>
+                              {row.status === "unacceptable" ? (
+                                <div className="flex items-center gap-2 rounded-lg  h-[34.67px] justify-center bg-[#FCEAEB]">
+                                  <Image
+                                    src={unacceptableImg}
+                                    alt=""
+                                    className="w-[15px] h-[15px]"
+                                  />
+                                  <p>مرفوض</p>
+                                </div>
+                              ) : (
+                                ""
+                              )}
+                            </>
+                          )}
+                        </>
+                      )}
+                    </TableCell>
+                    <TableCell className=" text-center">
+                      <div className="flex items-center justify-center gap-2">
+                        <button className="w-[35px] h-[35px] bg-[#F7F8FC] rounded-lg flex justify-center items-center">
+                          <Image src={editImage} alt="" />
+                          {""}
+                        </button>
+                        <button
+                          onClick={() => handleDeleteBook(row.id)}
+                          className="w-[35px] h-[35px] bg-[#F7F8FC] rounded-lg flex justify-center items-center"
+                        >
+                          <Image src={deleteImage} alt="" />
+                          {""}
+                        </button>
+                      </div>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            )}
           </Table>
         </TableContainer>
       </div>
