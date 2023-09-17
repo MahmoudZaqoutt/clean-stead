@@ -1,6 +1,7 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import TitleAndSubTitle from "../Shared/TitleAndSubTitle/TitleAndSubTitle";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { handleTotalPrice } from "@/redux/servicesSlice";
 
 const SummaryCard = () => {
   const summaryData = useSelector((state: any) => state.servicesReducer.book);
@@ -26,6 +27,10 @@ const SummaryCard = () => {
       </p>
     ));
   }
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(handleTotalPrice(totalPrice));
+  }, [totalPrice]);
 
   return (
     <div className="w-[370px] min-h-[375.45px] bg-[#E5F7FD] rounded-2xl pb-5">

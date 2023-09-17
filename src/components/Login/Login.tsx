@@ -160,7 +160,7 @@ export default function Login() {
     <div>
       <button
         onClick={handleClickOpen}
-        className="text-xl pb-3 font-semibold hover:bg-blue-50 ease-in-out duration-150 text-[#00ADEE]  rounded-full border-2 border-[#00ADEE] w-[120px] h-[50px] pt-2 text-center md:block hidden"
+        className="text-xl pb-3 font-semibold hover:bg-blue-50 ease-in-out duration-150 text-[#00ADEE]  rounded-full border-2 border-[#00ADEE] w-[120px] h-[50px] pt-2 text-center lg:block hidden"
       >
         دخول
       </button>

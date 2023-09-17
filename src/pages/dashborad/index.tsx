@@ -48,7 +48,7 @@ const index = () => {
   };
 
   return (
-    <div className="grid grid-cols-10">
+    <div className="grid grid-cols-10 -mt-[50px]">
       <div className="h-[890.87px] col-span-2 ">
         <div className="pr-[50px] mt-[35px] mb-[53px]">
           <Logo />

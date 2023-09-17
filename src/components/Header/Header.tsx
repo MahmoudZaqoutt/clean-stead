@@ -14,7 +14,7 @@ const Header = () => {
           <Logo />
           <div>
             <List
-              className=" gap-3 font-semibold text-lg text-[#1D1D35] hidden md:flex"
+              className=" gap-3 font-semibold text-lg text-[#1D1D35] hidden lg:flex"
               options={[
                 {
                   id: 1,
@@ -44,6 +44,13 @@ const Header = () => {
                   classNameOfLI:
                     "hover:bg-blue-50 ease-in-out duration-150 p-2",
                 },
+                {
+                  id: 4,
+                  href: "/dashborad",
+                  content: "لوحة التحكم",
+                  classNameOfLI:
+                    "hover:bg-blue-50 ease-in-out duration-150 p-2",
+                },
               ]}
             />
           </div>
@@ -60,15 +67,16 @@ const Header = () => {
                   href: "/book",
                   content: "احجز الآن",
                   classNameOfLI:
-                    "text-xl pb-3 bg-[#00ADEE] text-white  hidden md:block rounded-full  hover:bg-opacity-90 ease-in-out duration-150  pt-2  font-semibold text-center border-2 border-[#00ADEE] w-[120px] h-[50px]",
+                    "text-xl pb-3 bg-[#00ADEE] text-white  hidden lg:block rounded-full  hover:bg-opacity-90 ease-in-out duration-150  pt-2  font-semibold text-center border-2 border-[#00ADEE] w-[120px] h-[50px]",
                 },
               ]}
             />
             <MenuItems
-              className="md:hidden"
+              className="lg:hidden"
               shape={<MenuIcon className="text-4xl text-[#00ADEE]" />}
               Items={[
                 { href: "/home", content: "الرئيسية " },
+                { href: "/dashborad", content: "لوحة التحكم " },
                 { href: "/service", content: "الخدمات" },
                 { href: "/about", content: "من نحن" },
                 { href: "/contact-us", content: "اتصل بنا" },

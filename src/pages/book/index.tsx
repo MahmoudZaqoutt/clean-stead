@@ -32,7 +32,6 @@ const Book = () => {
     }
 
     if (activeStep === steps.length - 1) {
-      dispatch(handleBackToFirstStep());
       const selectedService = data.book.find(
         (item: any) => item.countOfServices > 0
       );
@@ -43,10 +42,10 @@ const Book = () => {
           setError("");
         }, 2000);
         return;
+      } else {
+        dispatch(handleBackToFirstStep(data.newBook));
+        setActiveStep(0);
       }
-
-      setActiveStep(0);
-      dispatch(handleBackToFirstStep());
     } else {
       setActiveStep((prevActiveStep) => prevActiveStep + 1);
     }

@@ -26,9 +26,9 @@ const BookPage = () => {
   const [unacceptableButtonColor, setUnacceptableButtonColor] =
     useState("white");
 
-  const Booking = useSelector((state: any) => state.servicesReducer.Booking);
+  const Bookings = useSelector((state: any) => state.servicesReducer.Bookings);
   const dispatch = useDispatch();
-  const [bookingData, setBookingData] = useState(Booking);
+  const [bookingData, setBookingData] = useState(Bookings);
 
   const handleDeleteBook = (id: number) => {
     dispatch(handleDeleteBooking(id));
@@ -36,10 +36,10 @@ const BookPage = () => {
 
   const handleInputChange = (e: any) => {
     setBookingData(
-      Booking.filter(
+      Bookings.filter(
         (item: any) =>
           item.name.toLowerCase().includes(e.target.value.toLowerCase()) ||
-          item.bookingNumber.includes(e.target.value)
+          item.bookingNumber?.includes(e.target.value)
       )
     );
     setSearchManually(true);
@@ -50,7 +50,7 @@ const BookPage = () => {
     setPendingButtonColor("white");
     setAcceptableButtonColor("white");
     setUnacceptableButtonColor("white");
-    setBookingData(Booking);
+    setBookingData(Bookings);
   };
 
   const handlePendingBookings = () => {
@@ -59,7 +59,7 @@ const BookPage = () => {
     setAcceptableButtonColor("white");
     setUnacceptableButtonColor("white");
     setSearchManually(true);
-    setBookingData(Booking.filter((item: any) => item.status === "pending"));
+    setBookingData(Bookings.filter((item: any) => item.status === "pending"));
   };
 
   const handleAcceptableBookings = () => {
@@ -68,7 +68,9 @@ const BookPage = () => {
     setAcceptableButtonColor("blue");
     setUnacceptableButtonColor("white");
     setSearchManually(true);
-    setBookingData(Booking.filter((item: any) => item.status === "acceptable"));
+    setBookingData(
+      Bookings.filter((item: any) => item.status === "acceptable")
+    );
   };
 
   const handleUnAcceptableBookings = () => {
@@ -78,7 +80,7 @@ const BookPage = () => {
     setUnacceptableButtonColor("blue");
     setSearchManually(true);
     setBookingData(
-      Booking.filter((item: any) => item.status === "unacceptable")
+      Bookings.filter((item: any) => item.status === "unacceptable")
     );
   };
 
@@ -196,21 +198,21 @@ const BookPage = () => {
                 {bookingData.map((row: any, index: number) => (
                   <TableRow key={index}>
                     <TableCell className=" !text-center">
-                      {row.bookingNumber}
+                      {row?.bookingNumber}
                     </TableCell>
-                    <TableCell className=" !text-center">{row.name}</TableCell>
+                    <TableCell className=" !text-center">{row?.name}</TableCell>
                     <TableCell className=" !text-center">
-                      {row.address}
-                    </TableCell>
-                    <TableCell className=" !text-center">
-                      $ {row.totalPrice}
-                    </TableCell>
-                    <TableCell className=" !text-center">{row.date}</TableCell>
-                    <TableCell className=" !text-center">
-                      {row.repetition}
+                      {row?.address}
                     </TableCell>
                     <TableCell className=" !text-center">
-                      {row.status === "pending" ? (
+                      $ {row?.totalPrice}
+                    </TableCell>
+                    <TableCell className=" !text-center">{row?.date}</TableCell>
+                    <TableCell className=" !text-center">
+                      {row?.repetition}
+                    </TableCell>
+                    <TableCell className=" !text-center">
+                      {row?.status === "pending" ? (
                         <div className="flex items-center gap-2 rounded-lg  h-[34.67px] justify-center bg-[#FFF3E8]">
                           <Image
                             src={pendingImg}
@@ -221,7 +223,7 @@ const BookPage = () => {
                         </div>
                       ) : (
                         <>
-                          {row.status === "acceptable" ? (
+                          {row?.status === "acceptable" ? (
                             <div className="flex items-center gap-2 rounded-lg  h-[34.67px] justify-center bg-[#E5F8EE]">
                               <Image
                                 src={acceptableImg}
@@ -232,7 +234,7 @@ const BookPage = () => {
                             </div>
                           ) : (
                             <>
-                              {row.status === "unacceptable" ? (
+                              {row?.status === "unacceptable" ? (
                                 <div className="flex items-center gap-2 rounded-lg  h-[34.67px] justify-center bg-[#FCEAEB]">
                                   <Image
                                     src={unacceptableImg}
@@ -256,7 +258,7 @@ const BookPage = () => {
                           {""}
                         </button>
                         <button
-                          onClick={() => handleDeleteBook(row.id)}
+                          onClick={() => handleDeleteBook(row?.id)}
                           className="w-[35px] h-[35px] bg-[#F7F8FC] rounded-lg flex justify-center items-center"
                         >
                           <Image src={deleteImage} alt="" />
@@ -269,24 +271,24 @@ const BookPage = () => {
               </TableBody>
             ) : (
               <TableBody>
-                {Booking.map((row: any, index: number) => (
+                {Bookings.map((row: any, index: number) => (
                   <TableRow key={index}>
                     <TableCell className=" !text-center">
-                      {row.bookingNumber}
+                      {row?.bookingNumber}
                     </TableCell>
-                    <TableCell className=" !text-center">{row.name}</TableCell>
+                    <TableCell className=" !text-center">{row?.name}</TableCell>
                     <TableCell className=" !text-center">
-                      {row.address}
-                    </TableCell>
-                    <TableCell className=" !text-center">
-                      $ {row.totalPrice}
-                    </TableCell>
-                    <TableCell className=" !text-center">{row.date}</TableCell>
-                    <TableCell className=" !text-center">
-                      {row.repetition}
+                      {row?.address}
                     </TableCell>
                     <TableCell className=" !text-center">
-                      {row.status === "pending" ? (
+                      $ {row?.totalPrice}
+                    </TableCell>
+                    <TableCell className=" !text-center">{row?.date}</TableCell>
+                    <TableCell className=" !text-center">
+                      {row?.repetition}
+                    </TableCell>
+                    <TableCell className=" !text-center">
+                      {row?.status === "pending" ? (
                         <div className="flex items-center gap-2 rounded-lg  h-[34.67px] justify-center bg-[#FFF3E8]">
                           <Image
                             src={pendingImg}
@@ -297,7 +299,7 @@ const BookPage = () => {
                         </div>
                       ) : (
                         <>
-                          {row.status === "acceptable" ? (
+                          {row?.status === "acceptable" ? (
                             <div className="flex items-center gap-2 rounded-lg  h-[34.67px] justify-center bg-[#E5F8EE]">
                               <Image
                                 src={acceptableImg}
@@ -308,7 +310,7 @@ const BookPage = () => {
                             </div>
                           ) : (
                             <>
-                              {row.status === "unacceptable" ? (
+                              {row?.status === "unacceptable" ? (
                                 <div className="flex items-center gap-2 rounded-lg  h-[34.67px] justify-center bg-[#FCEAEB]">
                                   <Image
                                     src={unacceptableImg}
@@ -332,7 +334,7 @@ const BookPage = () => {
                           {""}
                         </button>
                         <button
-                          onClick={() => handleDeleteBook(row.id)}
+                          onClick={() => handleDeleteBook(row?.id)}
                           className="w-[35px] h-[35px] bg-[#F7F8FC] rounded-lg flex justify-center items-center"
                         >
                           <Image src={deleteImage} alt="" />

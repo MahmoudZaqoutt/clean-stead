@@ -4,8 +4,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { handleDate, handleRepetition } from "@/redux/servicesSlice";
 
 const StepTwo = () => {
-  const book = useSelector((state: any) => state.servicesReducer.Booking);
+  const book = useSelector((state: any) => state.servicesReducer.newBook);
   const dispatch = useDispatch();
+
 
   const handleRepetitionChange = (e: any) => {
     dispatch(handleRepetition(e.target.id));
@@ -24,25 +25,25 @@ const StepTwo = () => {
         <div>
           <div className="flex flex-col sm:items-center sm:flex-row gap-5 lg:gap00 mt-[6px] mb-[20px]">
             <FrequencyOfServiceCard
-              id={book[0].repetition}
+              id={book.repetition}
               name="مرة واحدة"
               className="w-[123.18px]"
               onChange={handleRepetitionChange}
             />
             <FrequencyOfServiceCard
-              id={book[0].repetition}
+              id={book.repetition}
               name="يوميا"
               className="w-[93.97px]"
               onChange={handleRepetitionChange}
             />
             <FrequencyOfServiceCard
-              id={book[0].repetition}
+              id={book.repetition}
               name="اسبوعيا"
               className="w-[109.07px]"
               onChange={handleRepetitionChange}
             />
             <FrequencyOfServiceCard
-              id={book[0].repetition}
+              id={book.repetition}
               name="شهريا"
               className="w-[97.87px]"
               onChange={handleRepetitionChange}
@@ -53,7 +54,7 @@ const StepTwo = () => {
             <input
               onChange={handleDateChange}
               placeholder="التاريخ والوقت"
-              value={book[0].date}
+              value={book.date}
               type="date"
               id="date"
               title="date"

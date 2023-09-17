@@ -1,15 +1,52 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 interface ServiceState {
+  newBook: any;
   book: any;
-  Booking: any;
+  Bookings: any;
 }
 
 const initialState: ServiceState = {
-  Booking: [
+  newBook: {
+    id: Math.round(Math.random() * 10),
+    bookingNumber: String(Math.round(Math.random() * 100)),
+    name: "",
+    phoneNumber: "",
+    address: "",
+    Surgical_address: "",
+    date: "",
+    repetition: "",
+    status: "acceptable",
+    totalPrice: 120,
+  },
+  Bookings: [
     {
-      id: 0,
-      bookingNumber: "6351",
+      id: Math.round(Math.random() * 10),
+      bookingNumber: String(Math.round(Math.random() * 100)),
+      name: "John Doe",
+      phoneNumber: "123-456-7890",
+      address: "123 Main St",
+      Surgical_address: "456 Surgery St",
+      date: "2023-09-16",
+      repetition: "شهريا",
+      status: "pending",
+      totalPrice: 50,
+    },
+    {
+      id: Math.round(Math.random() * 10),
+      bookingNumber: String(Math.round(Math.random() * 100)),
+      name: "John Doe",
+      phoneNumber: "123-456-7890",
+      address: "123 Main St",
+      Surgical_address: "456 Surgery St",
+      date: "2023-09-16",
+      repetition: "شهريا",
+      status: "pending",
+      totalPrice: 50,
+    },
+    {
+      id: Math.round(Math.random() * 10),
+      bookingNumber: String(Math.round(Math.random() * 100)),
       name: "John Doe",
       phoneNumber: "123-456-7890",
       address: "123 Main St",
@@ -209,36 +246,42 @@ export const servicesSlice: any = createSlice({
     },
     handleDeleteBooking: (state, action) => {
       const bookingIdToDelete = action.payload;
-      state.Booking = state.Booking.filter(
-        (booking: any) => booking.id !== bookingIdToDelete
+      state.Bookings = state.Bookings.filter(
+        (booking: any) => booking?.id !== bookingIdToDelete
       );
     },
 
+    handleTotalPrice: (state, action) => {
+      state.newBook.totalPrice = action.payload;
+    },
     handleRepetition: (state, action) => {
-      state.Booking[0].repetition = action.payload;
+      state.newBook.repetition = action.payload;
     },
     handleDate: (state, action) => {
-      state.Booking[0].date = action.payload;
+      state.newBook.date = action.payload;
     },
     handleName: (state, action) => {
-      state.Booking[0].name = action.payload;
+      state.newBook.name = action.payload;
     },
     handlePhoneNumber: (state, action) => {
-      state.Booking[0].phoneNumber = action.payload;
+      state.newBook.phoneNumber = action.payload;
     },
     handleAddress: (state, action) => {
-      state.Booking[0].address = action.payload;
+      state.newBook.address = action.payload;
     },
     handleSurgical_address: (state, action) => {
-      state.Booking[0].Surgical_address = action.payload;
+      state.newBook.Surgical_address = action.payload;
     },
-    handleBackToFirstStep: (state) => {
-      return initialState;
+    handleBackToFirstStep: (state, action) => {
+      state.Bookings = [...state.Bookings, action.payload];
+      state.book = initialState.book;
+      state.newBook = initialState.newBook;
     },
   },
 });
 
 export const {
+  handleTotalPrice,
   handleIncrementAmount,
   handleDecrementAmount,
   handleCheckedChange,
